@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <left-message-bar></left-message-bar>
+    <toolbar-user></toolbar-user>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LeftMessageBar from "./components/LeftMessageBar.vue";
+import ToolbarUser from "./components/ToolbarUser.vue";
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LeftMessageBar,
+    ToolbarUser
   }
 }
 </script>
