@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col
-      cols=""
+      cols="12"
       sm="16"
       md="11"
     >
