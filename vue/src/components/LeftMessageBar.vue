@@ -1,9 +1,9 @@
 <template>
   <v-row justify="center">
     <v-col
-      cols="12"
-      sm="8"
-      md="6"
+      cols=""
+      sm="16"
+      md="11"
     >
       <v-card>
         <v-toolbar
