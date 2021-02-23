@@ -37,15 +37,14 @@
 </template>
 
 <script>
-export default {
-    name: "IdentityVerification"
-}
 
+export default {
+    name: "IdentityVerification",
     el: '#app',
     delimiters: ['${', '}'], // Avoid Twig conflicts
-    data: {
+    data: () => ({
         filelist: [] // Store our uploaded files
-    },
+    }),
     methods: {
         onChange() {
             this.filelist = [...this.$refs.file.files];
@@ -75,6 +74,7 @@ export default {
             event.currentTarget.classList.remove('bg-green-300');
         }
     }
+}
 </script>
 
 <style scoped>

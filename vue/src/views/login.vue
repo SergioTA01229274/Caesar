@@ -1,9 +1,9 @@
 <template>
     <div id="mainContainer">
-            <div class="footer content">
+            <div class="footer content" id="headerContainer">
                 <img src="../assets/CaesarLogo.png" id="caesarLogo">
                 <span id="header">Welcome to Caesar
-                <br><span id="subHeader"> A fully encrypted, anonymous and secure online chat</span>
+                <br><div id="subHeader"> A fully encrypted, anonymous and secure online chat</div>
                 </span>
             </div>
         <login-section id="loginForm"></login-section>
@@ -11,7 +11,7 @@
 </template>
 
 <style lang="scss">
-
+    
     #caesarLogo {
         width: 15rem;
         height: 15rem;
@@ -22,21 +22,27 @@
         font-family: Roboto;
         font-size: 5rem;
         font-weight: 500;
-        position: absolute;
+        color: black;
     }
     #subHeader {
-        margin-top: 2rem;
         font-family: Roboto;
         font-size: 2.5rem;
         font-weight: 500;
-        position: absolute;
-        text-align: center;
+        margin-top: 1.5rem;
+        color: black;
     }
     #loginForm {
         padding-left: 65%;
-        position: absolute;
+        position: fixed;
+        bottom: 20rem;
+        right: 3rem;
+        top: 5rem;
     }
-
+    #headerContainer {
+        position: fixed;
+        top: 5rem;
+        left: 5rem;
+    }
     #mainContainer {
         padding-top: 5rem;
     }
