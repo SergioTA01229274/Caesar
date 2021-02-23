@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/"></router-link> |
-      <router-link to="/about"></router-link>
-      <router-link to="/chat"></router-link>
-    </div>
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
