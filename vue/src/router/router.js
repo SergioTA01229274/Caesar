@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomePage from '../components/HomePage';
 import GUIChat from '../views/GUIChat';
-
+import IdentityVerificationView from '../views/IdentityVerificationView';
 
 Vue.use(VueRouter)
 
@@ -16,6 +16,11 @@ const routes = [
     path: '/chat',
     name: 'Chat',
     component: GUIChat
+  },
+  {
+    path: '/verification',
+    name: 'Identity Verification',
+    component: IdentityVerificationView
   }
 ]
 
