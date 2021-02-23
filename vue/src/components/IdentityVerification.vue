@@ -37,13 +37,17 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a2ff78458171a0c472e81fc08b85e2a2286bd8e5
 export default {
     name: "IdentityVerification",
     el: '#app',
     delimiters: ['${', '}'], // Avoid Twig conflicts
-    data: {
+    data: () => ({
         filelist: [] // Store our uploaded files
-    },
+    }),
     methods: {
         onChange() {
             this.filelist = [...this.$refs.file.files];
