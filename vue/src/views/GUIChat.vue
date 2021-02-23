@@ -4,11 +4,13 @@
             <topbar-user id="userBar"></topbar-user>
             <br>
             <v-row>
-                <v-col cols="4">
+                <v-col cols="3" offset-md="0">
                     <contacts-bar></contacts-bar>
                 </v-col>
-                <v-col cols="8">
+                <v-col cols="9" class="ma-x pa-x">
                     <toolbar-user></toolbar-user>
+                    <br><chat-section cols="9"></chat-section>
+                    <br><input-message-bar cols="9" style="padding-top: 0.3rem"></input-message-bar>
                 </v-col>
             </v-row>
         </v-container>
@@ -16,6 +18,8 @@
 </template>
 
 <script>
+import ChatSection from '../components/chatSection.vue';
+import inputMessageBar from '../components/inputMessageBar.vue'
 // @ is an alias to /src
 import ContactsBar from '../components/ContactsBar.vue';
 import ToolbarUser from '../components/ToolbarUser.vue';
@@ -26,7 +30,9 @@ export default {
   components: {
     ContactsBar,
     TopbarUser,
-    ToolbarUser
+    ToolbarUser,
+    ChatSection,
+    inputMessageBar
   }
 }
 </script>
