@@ -18,7 +18,7 @@ export default {
     #receiver {
         text-align: left;
         margin-left: 0.5em;
-        font-size: 3rem;
+        font-size: 2rem;
         font-weight: 500;
         color: #F2EEEE;
     }
