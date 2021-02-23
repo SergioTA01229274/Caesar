@@ -34,6 +34,7 @@
         width:25rem;
         font-size: 1.45rem;
         font-family: Roboto;
+        margin-left: 1.5em;
     }
     #submitButton{
         width:5em;
@@ -42,7 +43,7 @@
         font-weight: 500;
         background-color:#7983A6;
         color: #F2EEEE;
-        margin-left:6em;
+        margin-left:7.5em;
     }
     #app{
         width:24rem;
@@ -53,6 +54,7 @@
         width:30rem;
         box-shadow: 3px 5px #888888;
         margin-left: 23em;
+
     }
 </style>
 
