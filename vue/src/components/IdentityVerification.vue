@@ -21,6 +21,11 @@
                         <span id="span-key">Select folder that contains your login key 
                             and private key
                         </span>
+                         <ul class="mt-4" v-if="this.filelist.length" v-cloak>
+                            <li class="text-sm p-1" v-for="file in filelist">
+                                ${ file.name }<button class="ml-2" type="button" @click="remove(filelist.indexOf(file))" title="Remove file">remove</button>
+                            </li>
+                        </ul>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -95,7 +100,9 @@ export default {
     #span-key {
         color: #000001;
         font-family: Roboto;
-        
+        font-weight: 500;
+        font-size: 2em;
+        opacity: 60%;
     }
     #container-inside {
         background-color: #C4C4C4;
@@ -104,6 +111,6 @@ export default {
     }
     #file-input {
         margin-top: 1.5em;
-        margin-bottom: 4em;
+        margin-bottom: 2em;
     }
 </style>
