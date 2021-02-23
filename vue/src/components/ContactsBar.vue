@@ -3,7 +3,7 @@
     <v-col
       cols="12"
       sm="16"
-      md="10"
+      md="12"
     >
       <v-card>
         <v-toolbar
@@ -29,10 +29,11 @@
               v-if="item.header"
               :key="item.header"
               inset
+              id="contactsSubHeader"
             >
-              {{
-                item.header
-              }}
+                {{
+                  item.header
+                }}
             </v-subheader>
 
             <v-divider
@@ -46,11 +47,11 @@
               :key="item.title"
               ripple
             >
-              <v-list-item-avatar>
-                <img :src="item.avatar">
-              </v-list-item-avatar>
+            <v-avatar :color="item.avatarColor"><v-icon>
+                {{item.avatar}}
+              </v-icon></v-avatar>
               <v-list-item-content>
-                <v-list-item-title v-html="item.title"></v-list-item-title>
+                <v-list-item-title v-html="item.title" style="font-size: 1.5rem"></v-list-item-title>
                 <v-list-item-subtitle
                   v-html="item.subtitle"
                 ></v-list-item-subtitle>
@@ -64,13 +65,8 @@
 </template>
 
 <script>
-export default {
-    name: "ContactsBar"
-}
-</script>
-
-<script>
   export default {
+    name:"ContactsBar",
     data () {
       return {
         items: [
@@ -79,10 +75,60 @@ export default {
           },
           { divider: true },
           {
-            avatar: 'https://picsum.photos/250/300?image=660',
-            title: 'Meeting @ Noon',
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
             subtitle:
-              `<span class="font-weight-bold">Spike Lee</span> &mdash; I'll be in your neighborhood`,
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
+          },
+          {
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
+            subtitle:
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
+          },
+          {
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
+            subtitle:
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
+          },
+          {
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
+            subtitle:
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
+          },
+          {
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
+            subtitle:
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
+          },
+          {
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
+            subtitle:
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
+          },
+          {
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
+            subtitle:
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
+          },
+          {
+            avatar: "mdi-sunglasses",
+            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+            title: 'Mr. Blue',
+            subtitle:
+              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
           }
         ],
       }
@@ -90,10 +136,13 @@ export default {
   }
 </script>
 
-<style scoped>
-
+<style lang="scss">
     .b {
       font-size: 1.5em;
       color: #F2EEEE;
+    }
+    #contactsSubHeader {
+      font-size: 1.5rem;
+      padding-left: 4rem;
     }
 </style>
