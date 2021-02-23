@@ -65,7 +65,7 @@
 
 <script>
 export default {
-    name: "LeftMessageBar"
+    name: "ContactsBar"
 }
 </script>
 
