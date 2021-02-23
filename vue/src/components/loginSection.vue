@@ -32,7 +32,7 @@
     }
     .logButton {
         width: 22em;
-        margin-left: 2.5em;
+        margin-left: 0.5em;
     }
     #loginSection {
         background-color: #E5E5E5;
