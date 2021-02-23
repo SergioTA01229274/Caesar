@@ -1,17 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomePage from '../components/HomePage';
 import GUIChat from '../views/GUIChat';
 import IdentityVerificationView from '../views/IdentityVerificationView';
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'HomePage',
-    component: HomePage
-  },
   {
     path: '/chat',
     name: 'Chat',
@@ -21,6 +15,14 @@ const routes = [
     path: '/verification',
     name: 'Identity Verification',
     component: IdentityVerificationView
+  },
+  {
+    name: 'Login',
+    path: '/',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../views/login.vue')
   }
 ]
 
