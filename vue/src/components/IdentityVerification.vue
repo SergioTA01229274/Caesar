@@ -13,7 +13,7 @@
                 <v-col>
                     <v-btn id="btn-upload">
                         Upload Files
-                        <v-icon></v-icon>
+                        <v-icon>mdi-arrow-collapse-up</v-icon>
                     </v-btn>
                 </v-col>
             </v-row>
@@ -35,8 +35,9 @@ export default {
         padding-top: 1.75rem !important;
         background-color: #E5E5E5;
         height: 23rem;
-        width: 30rem;
+        width: 50rem;
         box-shadow: 3px 5px #888888;
+        margin-left: 15em;
     }
     #btn-upload {
         background-color: #7983A6;
