@@ -38,9 +38,7 @@
 
 <script>
 export default {
-    name: "IdentityVerification"
-}
-
+    name: "IdentityVerification",
     el: '#app',
     delimiters: ['${', '}'], // Avoid Twig conflicts
     data: {
@@ -75,6 +73,7 @@ export default {
             event.currentTarget.classList.remove('bg-green-300');
         }
     }
+}
 </script>
 
 <style scoped>
