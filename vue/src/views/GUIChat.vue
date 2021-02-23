@@ -1,7 +1,7 @@
 <template>
     <div class="GUIChat">
         <v-container fluid>
-            <topbar-user></topbar-user>
+            <topbar-user id="userBar"></topbar-user>
             <br>
             <v-row>
                 <v-col cols="4">
@@ -39,4 +39,5 @@ export default {
         text-align: center;
     }
 
+    
 </style>
