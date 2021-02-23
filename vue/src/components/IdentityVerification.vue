@@ -5,19 +5,15 @@
                 <v-row @dragover="dragover" @dragleave="dragleave" @drop="drop">
                     <v-col cols="12" id="file-input">
                         <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" 
-      class="w-px h-px opacity-0 overflow-hidden absolute" @change="onChange" ref="file" accept=".pdf,.jpg,.jpeg,.png" />
-  
-    <label for="assetsFieldHandle" class="block cursor-pointer">
-      <div>
-        Explain to our users they can drop files in here 
-        or <span class="underline">click here</span> to upload their files
-      </div>
-    </label>
-    <ul class="mt-4" v-if="this.filelist.length" v-cloak>
-      <li class="text-sm p-1" v-for="file in filelist" :key="file">
-        {{file.name }}<button class="ml-2" type="button" @click="remove(filelist.indexOf(file))" title="Remove file">Remove</button>
-      </li>
-    </ul>
+                         class="w-px h-px opacity-0 overflow-hidden absolute" @change="onChange" ref="file" accept=".pdf, .key" />
+                        <ul class="mt-4" v-if="this.filelist.length" v-cloak>
+                            <dt class="text-sm p-1" v-for="file in filelist" :key="file" id="file-list">
+                                {{file.name }}
+                                <v-btn  rounded class="ml-1 btn-file" @click="remove(filelist.indexOf(file))" title="Remove file" > 
+                                    <v-icon class="btn-file">mdi-trash-can</v-icon> 
+                                </v-btn>
+                            </dt>
+                        </ul>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -89,7 +85,7 @@ export default {
     #container {
         padding-top: 1.75rem !important;
         background-color: #E5E5E5;
-        height: 23rem;
+        height: 24rem;
         width: 50rem;
         box-shadow: 3px 5px #888888;
         margin-left: 15em;
@@ -107,11 +103,21 @@ export default {
     }
     #container-inside {
         background-color: #C4C4C4;
-        height: 20em;
+        height: 21.5em;
         width: 40em;
     }
     #file-input {
         margin-top: 1.5em;
-        margin-bottom: 2em;
+        margin-bottom: 0.5em;
+    }
+    .btn-file {
+        background-color: #D32F2F !important;
+    }
+    #file-list {
+        width: 25em;
+        align-content: center;
+        justify-content: center;
+        margin: auto;
+        text-align: center;
     }
 </style>
