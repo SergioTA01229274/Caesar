@@ -1,12 +1,13 @@
 <template>
     <div class="GUIChat">
         <v-container fluid>
+            <topbar-user></topbar-user>
+            <br>
             <v-row>
-                <v-col cols="5">
-                    <left-message-bar></left-message-bar>
+                <v-col cols="4">
+                    <contacts-bar></contacts-bar>
                 </v-col>
-                <v-col cols="7">
-                    <topbar-user></topbar-user>
+                <v-col cols="8">
                     <toolbar-user></toolbar-user>
                 </v-col>
             </v-row>
@@ -16,14 +17,14 @@
 
 <script>
 // @ is an alias to /src
-import LeftMessageBar from '../components/LeftMessageBar.vue';
+import ContactsBar from '../components/ContactsBar.vue';
 import ToolbarUser from '../components/ToolbarUser.vue';
 import TopbarUser from '../components/TopbarUser.vue';
 
 export default {
   name: 'GUIChat',
   components: {
-    LeftMessageBar,
+    ContactsBar,
     TopbarUser,
     ToolbarUser
   }
