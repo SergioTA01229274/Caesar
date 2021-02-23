@@ -37,10 +37,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
-
->>>>>>> a2ff78458171a0c472e81fc08b85e2a2286bd8e5
 export default {
     name: "IdentityVerification",
     el: '#app',
