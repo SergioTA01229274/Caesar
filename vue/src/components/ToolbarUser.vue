@@ -1,9 +1,7 @@
 <template>
-    <v-system-bar dark color=#7983A6 height="60" style="margin-top: 1em">
-        <span id="receiver">Mr. Blue</span>
-        <v-spacer></v-spacer>
-        <v-icon></v-icon>
-    </v-system-bar>
+    <div id="receiverBar">
+        <h4 id="receiver">Mr. Blue</h4>
+    </div>
 </template>
 
 <script>
@@ -18,16 +16,15 @@ export default {
 
 <style scoped>
     #receiver {
-        font-size: 2rem;
+        text-align: left;
+        margin-left: 0.5em;
+        font-size: 3rem;
+        font-weight: 500;
         color: #F2EEEE;
-        padding: 0.4em;
     }
-    #img {
-        height: 1em;
-        width: 1em;
+
+    #receiverBar {
+        background-color: #7983A6 !important;
     }
-    #vimg {
-        height: 3em;
-        width: 3em;
-    }
+    
 </style>

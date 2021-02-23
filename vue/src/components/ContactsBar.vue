@@ -3,18 +3,18 @@
     <v-col
       cols="12"
       sm="16"
-      md="12"
+      md="10"
     >
       <v-card>
         <v-toolbar
           color=#7983A6
           dark
         >
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-          <v-toolbar-title
+          <v-text-field
            class="b"
-           >Message Board</v-toolbar-title>
+           dense
+           >Search contact</v-text-field>
 
           <v-spacer></v-spacer>
 
@@ -75,7 +75,7 @@ export default {
       return {
         items: [
           {
-            header: 'Today',
+            header: 'Contacts',
           },
           { divider: true },
           {
@@ -93,7 +93,7 @@ export default {
 <style scoped>
 
     .b {
-      font-size: 1em;
+      font-size: 1.5em;
       color: #F2EEEE;
     }
 </style>

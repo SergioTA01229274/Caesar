@@ -6,19 +6,20 @@
             </v-col>
             <v-spacer></v-spacer>
             <v-col cols="2">
-                <v-btn class="mx-2"
+                <div id="buttonsCont">
+                    <v-btn class="mx-2"
                     id="sender-btn"
                     fab>
                     <v-img src="../assets/CaesarLogo.png" id="vimg"></v-img>
                 </v-btn>
-            </v-col>
-            <v-col cols="2">
                 <v-btn
-                    class="justify-end"
-                    dark
-                    id="logout-btn">
-                    <v-icon>mdi-account-circle</v-icon>
+                    class="justify-end mx-2"
+                    id="logout-btn"
+                    fab
+                    dark>
+                    <v-icon>mdi-logout</v-icon>
                 </v-btn>
+                </div>
             </v-col>
         </v-row>
     </v-toolbar>
@@ -32,15 +33,22 @@ export default {
 
 <style scoped>
     #senderv {
-        font-size: 2rem;
+        font-size: 2.5rem;
         color: #F2EEEE;
-        padding: 0em;
+        font-weight: 500;
+        float: left;
+    }
+    #buttonsCont {
+        float: right;
     }
     #logout-btn {
+        height: 3rem;
+        width: 3rem;
         font-size: 2rem;
         color: #F2EEEE;
         background-color: #D50000;
-        margin-top: 0.3em;
+        margin-top: 0.25rem;
+        margin-left: 2rem;
     }
     #vimg {
         height: 3em;
@@ -51,6 +59,9 @@ export default {
         margin-right: 9em;
     }
     #sender-btn {
-        background-color: #79797D;
+        background: none !important;
+        margin-top: 0.25rem;
+        height: 3rem;
+        width: 3rem;
     }
 </style>
