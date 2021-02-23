@@ -4,16 +4,20 @@
             <v-container id="container-inside">
                 <v-row @dragover="dragover" @dragleave="dragleave" @drop="drop">
                     <v-col cols="12" id="file-input">
-                        <v-file-input
-                            multiple
-                            label="File input"
-                            name="fields[assetsFieldHandle][]" 
-                            id="assetsFieldHandle" 
-                            class="w-px h-px opacity-0 overflow-hidden absolute" 
-                            @change="onChange" 
-                            ref="file"
-                            accept=".pdf,.jpg,.jpeg,.png"
-                        ></v-file-input>
+                        <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle" 
+      class="w-px h-px opacity-0 overflow-hidden absolute" @change="onChange" ref="file" accept=".pdf,.jpg,.jpeg,.png" />
+  
+    <label for="assetsFieldHandle" class="block cursor-pointer">
+      <div>
+        Explain to our users they can drop files in here 
+        or <span class="underline">click here</span> to upload their files
+      </div>
+    </label>
+    <ul class="mt-4" v-if="this.filelist.length" v-cloak>
+      <li class="text-sm p-1" v-for="file in filelist" :key="file">
+        {{file.name }}<button class="ml-2" type="button" @click="remove(filelist.indexOf(file))" title="Remove file">Remove</button>
+      </li>
+    </ul>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -21,11 +25,6 @@
                         <span id="span-key">Select folder that contains your login key 
                             and private key
                         </span>
-                         <ul class="mt-4" v-if="this.filelist.length" v-cloak>
-                            <li class="text-sm p-1" v-for="file in filelist">
-                                ${ file.name }<button class="ml-2" type="button" @click="remove(filelist.indexOf(file))" title="Remove file">remove</button>
-                            </li>
-                        </ul>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -46,9 +45,11 @@ export default {
     name: "IdentityVerification",
     el: '#app',
     delimiters: ['${', '}'], // Avoid Twig conflicts
-    data: () => ({
-        filelist: [] // Store our uploaded files
-    }),
+    data() {
+        return {
+            filelist: [] // Store our uploaded files
+        }
+    },
     methods: {
         onChange() {
             this.filelist = [...this.$refs.file.files];
