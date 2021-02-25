@@ -30,9 +30,6 @@ import signup from '../components/signup.vue'
 </script>
 
 <style scoped>
-    .registerDiv{
-
-    }
     #header{
         font-family: Roboto;
         font-size: 3rem;
@@ -45,7 +42,6 @@ import signup from '../components/signup.vue'
         width:15rem;
         height:15rem;
         float:left;
-        opacity:75%;
         margin-left: 1em;
         margin-top: 1em;
     }

@@ -36,7 +36,6 @@ export default {
         width: 15rem;
         height: 15rem;
         float: left;
-        opacity: 75%;
         margin-left: 1em;
         margin-top: 1em;
     }

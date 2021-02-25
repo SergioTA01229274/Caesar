@@ -12,8 +12,6 @@
 </template>
 
 <style lang="scss">
-    
-   
     #headerContainer {
         position: fixed;
         top: 7.5rem;

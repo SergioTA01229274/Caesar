@@ -28,7 +28,6 @@
         color: black;
     }
     #caesarLogo {
-        opacity: 85%;
         height: 14.5rem;
         width: 14.5rem;
     }
