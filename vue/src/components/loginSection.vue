@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <v-container id="app">
         <form id="loginSection">
             <div id="container">
                 <v-text-field class="inputField" label="Username" hide-details="auto" filled rounded dense>
@@ -14,7 +14,7 @@
             </v-btn>
             </div>
         </form>
-    </div>
+    </v-container>
 </template>
 
 <style lang="scss">
