@@ -10,7 +10,7 @@
                     <v-btn class="mx-2"
                     id="sender-btn"
                     fab>
-                    <v-img src="@/assets/img/CaesarLogo.png" id="vimg"></v-img>
+                    <v-img src="@/assets/CaesarLogo.png" id="vimg"></v-img>
                 </v-btn>
                 <v-btn
                     class="justify-end mx-2"
