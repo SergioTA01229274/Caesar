@@ -16,7 +16,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "vue/dist/index.html"
+        "destination": "/index.html"
       }
     ]
   },
