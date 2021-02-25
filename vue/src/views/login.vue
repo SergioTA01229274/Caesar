@@ -1,7 +1,7 @@
 <template>
     <div id="mainContainer">
             <div class="footer content" id="headerContainer">
-                <img src="../assets/CaesarLogo.png" id="caesarLogo">
+                <img src="@/assets/img/CaesarLogo.png" id="caesarLogo">
                 <span id="header">Welcome to Caesar
                 <br><div id="subHeader"> A fully encrypted, anonymous and secure online chat</div>
                 </span>

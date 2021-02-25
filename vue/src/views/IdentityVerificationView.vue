@@ -4,7 +4,7 @@
             <v-row>
                 <div class="footer content">
                     <v-col>
-                        <img src="../assets/CaesarLogo.png" id="caesarLogo">
+                        <img src="@/assets/img/CaesarLogo.png" id="caesarLogo">
                     </v-col>
                     <v-col>
                         <span id="header">We want to make sure you are Mr. Green
