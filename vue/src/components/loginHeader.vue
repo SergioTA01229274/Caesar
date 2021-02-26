@@ -10,7 +10,6 @@
 </template>
 
 <style lang="scss">
-    
     #header {
         font-family: Roboto;
         font-size: 4.5rem;
@@ -37,4 +36,4 @@
   export default {
     name:"loginHeader"
   }
-</script> 
+</script>

@@ -1,20 +1,18 @@
 <template>
     <div class="registerDiv">
-        <v-container fluid>
+        <div id="mainContainer">
             <v-row>
-                <div class = 'footer content'>
-                    <v-col>
+                    <v-col :cols="2">
                         <img src="@/assets/CaesarLogo.png" id='ceasarLogo'>
                     </v-col>
-                    <v-col>
-                        <span id = 'header'>
+                    <v-col :cols="6" id = 'header'>
+                        <span>
                             Create an account and start communicating securely
                         </span>
                     </v-col>
-                </div>
             </v-row>
-        </v-container>
-        <signup></signup>
+        </div>
+        <signup id="registerForm"></signup>
     </div>
 </template>
 
@@ -30,13 +28,22 @@ import signup from '../components/signup.vue'
 </script>
 
 <style scoped>
+    #registerForm {
+        margin-left: 12.5rem;
+        margin-top: 2rem;
+    }
+    #mainContainer {
+        margin-top: 2rem;
+        margin-left: 17.5rem;
+    }
     #header{
         font-family: Roboto;
+        position: fixed;
         font-size: 3rem;
         font-weight: 500;
-        position: absolute;
         color: #000001;
-        margin-top:1em;
+        margin-top: 5rem;
+        margin-left: 10rem;
     }
     #ceasarLogo{
         width:15rem;

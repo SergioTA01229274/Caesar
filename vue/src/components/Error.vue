@@ -22,21 +22,18 @@ export default {
     .header {
         font-family: Roboto;
         font-weight: 500;
-        font-size: 5em;
+        font-size: 5rem;
         color: #000001;
-        margin-top: 1em;
+        margin-top: 1rem;
         text-align: center;
     }
     #caesarLogo {
-        width: 15rem;
-        height: 15rem;
+        width: 17.5rem;
+        height: 17.5rem;
         float: left;
-        margin-left: 1em;
-        margin-top: 1em;
     }
     #headerContainer {
         position: fixed;
         top: 12rem;
-        left: 12rem;
     }
 </style>

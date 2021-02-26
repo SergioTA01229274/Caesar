@@ -1,20 +1,16 @@
 <template>
-    <div class="IdentVer">
-        <v-container fluid>
-            <v-row>
-                <div class="footer content">
-                    <v-col>
-                        <img src="@/assets/CaesarLogo.png" id="caesarLogo">
-                    </v-col>
-                    <v-col>
-                        <span id="header">We want to make sure you are Mr. Green
-                            Please upload your identity package
-                        </span>
-                    </v-col>
-                </div>
-            </v-row>
-        </v-container>
-        <identity-verification></identity-verification>
+    <div>
+        <v-row id="headerContainer" class="footer content">
+                <v-col :cols="2">
+                    <img src="@/assets/CaesarLogo.png" id="caesarLogo">
+                </v-col>
+                <v-col :cols="8" id="header">
+                    <span>We want to make sure you are Mr. Green
+                        Please upload your identity package
+                    </span>
+                </v-col>
+        </v-row>
+        <div><identity-verification id="fileSection"></identity-verification></div>
     </div>
 </template>
 
@@ -32,28 +28,27 @@ export default {
 
 <style scoped>
 
+    #fileSection {
+        margin-left: 10rem;
+    }
+
+    #headerContainer {
+        margin-top: 2.5rem;
+        margin-left: 5rem;
+    }
     #caesarLogo {
         width: 15rem;
         height: 15rem;
         float: left;
-        margin-left: 1em;
-        margin-top: 1em;
+        margin-left: 5rem;
     }
     #header {
         font-family: Roboto;
+        position: fixed;
+        left: 20rem;
         font-size: 3rem;
         font-weight: 500;
-        position: absolute;
         color: #000001;
-        margin-top: 1em;
-    }
-    #subHeader {
-        font-family: Roboto;
-        font-size: 2.5rem;
-        font-weight: 500;
-        position: absolute;
-        text-align: center;
-        color: #000001;
-        margin-left: 8em;
+        margin-top: 2.5rem;
     }
 </style>

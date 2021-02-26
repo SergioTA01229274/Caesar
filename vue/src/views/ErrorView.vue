@@ -1,8 +1,15 @@
 <template>
     <div class="ErrorView">
-        <error></error>
+        <div class="footer content" id="compContainer"><error></error></div>
     </div>
 </template>
+
+<style lang="scss">
+    #compContainer {
+        position: fixed !important;
+        left: 22.5rem;
+    }
+</style>
 
 <script>
 export default {
