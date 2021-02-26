@@ -1,6 +1,6 @@
 <template>
         <v-row class="align-start justify-start">
-                <v-col cols="2" id="logoCol"><img src="../assets/CaesarLogo.png" id="caesarLogo"></v-col>
+                <v-col cols="2" id="logoCol"><img src="@/assets/CaesarLogo.png" id="caesarLogo"></v-col>
                 <v-col cols="10" id="headerCol">
                     <div id="header">Welcome to Caesar
                     <br><div id="subHeader"> A fully encrypted, anonymous and secure online chat</div>
@@ -29,7 +29,6 @@
         color: black;
     }
     #caesarLogo {
-        opacity: 85%;
         height: 14.5rem;
         width: 14.5rem;
     }
