@@ -11,13 +11,13 @@ import "firebase/firestore";
 
 // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
 var firebaseConfig = {
-    apiKey: "AIzaSyDRT8wL656gXCg2Eltmc0qvRKqOwuttKlk",
+    apiKey: process.env.API_KEY,
     authDomain: "ceaser-chat.firebaseapp.com",
     databaseURL: "https://ceaser-chat-default-rtdb.firebaseio.com",
     projectId: "ceaser-chat",
     storageBucket: "ceaser-chat.appspot.com",
-    messagingSenderId: "204245971346",
-    appId: "1:204245971346:web:2641cf52beee99daacd14b",
+    messagingSenderId: process.env.MESSAGING_SENDERID,
+    appId: process.env.APPID,
     measurementId: "G-T2GP5ML24V"
   };
 
