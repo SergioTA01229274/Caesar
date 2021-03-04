@@ -17,6 +17,8 @@
     </div>
 </template>
 
+
+
 <script>
 import ChatSection from '../components/chatSection.vue';
 import inputMessageBar from '../components/inputMessageBar.vue'
@@ -24,6 +26,8 @@ import inputMessageBar from '../components/inputMessageBar.vue'
 import ContactsBar from '../components/ContactsBar.vue';
 import ToolbarUser from '../components/ToolbarUser.vue';
 import TopbarUser from '../components/TopbarUser.vue';
+
+
 
 export default {
   name: 'GUIChat',
@@ -33,9 +37,13 @@ export default {
     ToolbarUser,
     ChatSection,
     inputMessageBar
-  }
+  },
 }
 </script>
+
+
+
+
 
 <style scoped>
 

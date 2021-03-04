@@ -80,55 +80,6 @@
             title: 'Mr. Blue',
             subtitle:
               `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          },
-          {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          },
-          {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          },
-          {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          },
-          {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          },
-          {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          },
-          {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          },
-          {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
           }
         ],
       }
