@@ -1,14 +1,10 @@
-const firebaseConfig = require('../config/databaseConfig');
-const firebase = require("firebase-admin");
-require("firebase/firestore");
+const serviceAccount = require('../config/serviceAccountKey.json');
+const admin = require("firebase-admin");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://ceaser-chat-default-rtdb.firebaseio.com"
+});
+const database = admin.firestore();
 
-// Initialize Firebase
-async function initialize(){
-    await firebase.initializeApp(firebaseConfig);
-    return firebase.firestore();
-}
-
-//Implement close method
-//Implement query executor
-
-module.exports.initialize = initialize;
+module.exports.database = database;
+//module.exports.close = close;

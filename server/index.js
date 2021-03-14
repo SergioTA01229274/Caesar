@@ -1,13 +1,12 @@
 require('dotenv').config();
 
 const webServer = require('./services/webServer');
-const database = require('./services/database');
 let db = null;
 
 async function startup() {
     console.log('Initializing database connection...');
     try {
-        db = await database.initialize();
+        db = require('./services/database');
         console.log('Database connected succesfully !');
     } catch (err) {
         console.log('Failed to connect: ', err);
@@ -26,14 +25,14 @@ async function startup() {
 
 async function shutdown(e) {
     let err = e;
-
+    /*
     console.log('Shutting down the db connection...');
     try {
-        await database.close();
+        await db.close();
     } catch (e) {
         err = err || e;
         console.log('Failed to close the db connection', e);
-    }
+    }*/
 
     console.log('Shutting down the server...');
     try {
