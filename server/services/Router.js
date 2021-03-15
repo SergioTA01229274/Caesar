@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router();
 const users = require('../controllers/Users');
 
-
-router.route('/hello').get(() => {
-    console.log("Hello world !");
-});
-
 router.route('/findUser')
     .get(users.find);
 
@@ -19,11 +14,23 @@ router.route('/loginPass')
 router.route('/loginIden')
     .post(users.loginIden);
 
+router.route('/getUserContacts')
+    .get(users.getUserContacts);
+
+router.route('/addUserContacts')
+    .post(users.addUserContacts);
+
 module.exports = router;
+
 /*
 
-router.route('/getUser/:username')
-    .get(users.getUser);
+router.route('/logout')
+    .post(users.logout);
+*/
+
+/*
+
+
 
 
 

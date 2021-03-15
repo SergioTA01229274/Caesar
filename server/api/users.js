@@ -77,11 +77,54 @@ async function loginIden(name, key){
     return {msg: 'Identity package succesfully matched.', statusCode: 200, data: generalData};
 }
 
+async function getUserContacts(username){
+    const userSnapshot = await usersCollection.doc(username);
+    let resObj = {msg: 'No contacts found. User has not added any contact.', statusCode: 404, data: null};
+    let contactsArr = await userSnapshot.get().then((doc) => {
+        return doc.data().contacts;
+    });
+
+    if(contactsArr.length > 0){
+        resObj.msg = `${username} has ${contactsArr.length} contacts !`;
+        resObj.statusCode = 200;
+        resObj.data = {userContacts: contactsArr};
+    }
+    return resObj;
+}
+
+async function addUserContacts(username, contactsToAdd){
+    const userSnapshot = await usersCollection.doc(username);
+    let resObj = {msg: 'No contacts added !', statusCode: 400, data: null};
+    if(contactsToAdd.length == 0){
+        return resObj;
+    }
+    let contactsArr = await userSnapshot.get().then((doc) => {
+        return doc.data().contacts;
+    });
+
+    let individualRes = '';
+    let flag = false;
+    for (let i = 0; i < contactsToAdd.length; i++) {
+        if(contactsArr.includes(contactsToAdd[i])){
+            continue;
+        }
+        flag = true;
+        let tmpExistingVer = await find(contactsToAdd[i]);
+        if(tmpExistingVer.statusCode != 404){
+            contactsArr.push(contactsToAdd[i]);
+            individualRes += `${contactsToAdd[i]}\t added!\n`;
+            continue;
+        }
+    individualRes += `${contactsToAdd[i]}\t not added!\n`; 
+    }
+    console.log(individualRes);
+    userSnapshot.update({contacts: contactsArr});
+    return {msg: (flag ? 'No errors when trying to add contacts': 'Cannot add contacts entered.'), statusCode: (flag ? 200: 400), data: (flag ? individualRes: null)};
+}
+
 module.exports.find = find;
 module.exports.signUp = signUp; 
 module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
-
-/*
-
-}*/
+module.exports.getUserContacts = getUserContacts;
+module.exports.addUserContacts = addUserContacts;

@@ -33,45 +33,22 @@
 
 <script>
 
-/*
-let caesar = WebAssembly.instantiateStreaming(fetch('../plugins/cipher.wasm',{headers:{"Content-Type":"application/wasm"}}))
-.then((obj) => {
-    obj => obj.instance.exports.testFunc()
-});
-*/
-/*
-let caesar =  fetch('../plugins/cipher.wasm', {headers: {"Content-Type":"application/wasm"}});
-WebAssembly.instantiateStreaming(caesar).then((instance) =>{
-    instance.exports.testFunc("addfsf");
-});
-*/
-
-/*
-let caesar = fetch('../plugins/cipher.wasm').then(response => 
-  	response.arrayBuffer()
-  ).then(bytes => 
-    WebAssembly.instantiate(bytes)
-  ).then(obj => {
-      console.log(obj.instance.exports.testFunc());
-  });
-*/
-/*
-let caesar = null;
-import('../plugins/cipherScript.wasm').then((m) => {
-    caesar = Module();
-});
-const extractModule = async (module) => {
-  const { instance } = await module();
-  return instance.exports;
-};
-*/
-
 export default {
 
     name:"inputMessageBar",
+    mounted() {
+        const cipherPlugin = document.createElement("script");
+        cipherPlugin.setAttribute(
+        "src",
+        "http://localhost:8080/hello.js"
+        );
+        cipherPlugin.async = true;
+        document.head.appendChild(cipherPlugin);
+        },
     methods: {
         showReq() {
-            console.log("sdfdsf");
+            let d= Module.cwrap("sumar", "number");
+            console.log(d());
         }
     }
   }

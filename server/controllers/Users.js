@@ -51,7 +51,27 @@ async function loginIden(req, res, next){
     }
 }
 
+async function getUserContacts(req, res, next){
+    try {
+        const userConstacts = await users.getUserContacts(req.body.username);
+        return res.status(userConstacts.statusCode).json({msg: userConstacts.msg, data: userConstacts.data});
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function addUserContacts(req, res, next){
+    try {
+        const additionResponse = await users.addUserContacts(req.body.username, req.body.contactsToAdd);
+        return res.status(additionResponse.statusCode).json({msg: additionResponse.msg, data: additionResponse.data});
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports.find = find;
 module.exports.signUp = signUp;
 module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
+module.exports.getUserContacts = getUserContacts;
+module.exports.addUserContacts = addUserContacts;
