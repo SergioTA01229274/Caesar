@@ -64,4 +64,5 @@ process.on('uncaughtException', (err) => {
 });
 
 startup();
-firebase.app().delete();
+process.on('exit', ()=>{firebase.app().delete()
+});
