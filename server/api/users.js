@@ -92,6 +92,33 @@ async function getUserContacts(username){
     return resObj;
 }
 
+async function chat(name, pass){
+    const userSnapshot = await usersCollection.get();
+    let resObj = {msg: 'Cannot login. User not found !', statusCode: 403, data: null};
+    let tmpPassHash = null;
+    let loginData = null;
+    userSnapshot.forEach((doc) => {
+        tmpData = doc.data();
+        if(String(doc.id) == name){
+            resObj.statusCode = 200;
+            tmpPassHash = tmpData.password;
+            loginData = {publicKey: tmpData.publicKey}
+        }
+    });
+    if(resObj.statusCode == 403){
+        return resObj;
+    }
+    let inputPassHash = crypto.createHash('sha256').update(pass).digest('hex');
+    if(String(inputPassHash) != String(tmpPassHash)){
+        return {msg: 'Cannot Login. Invalid credentials !', statusCode: 403, data: null}
+    }
+    const a =  {msg: 'Login succesfully !', statusCode: 200, data: loginData};
+
+    return console.log('Prueba Chat') + a;
+}
+
+
+
 async function addUserContacts(username, contactsToAdd){
     const userSnapshot = await usersCollection.doc(username);
     let resObj = {msg: 'No contacts added !', statusCode: 400, data: null};
@@ -128,3 +155,4 @@ module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
 module.exports.getUserContacts = getUserContacts;
 module.exports.addUserContacts = addUserContacts;
+module.exports.chat = chat;

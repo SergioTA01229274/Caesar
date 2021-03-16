@@ -20,6 +20,9 @@ router.route('/getUserContacts')
 router.route('/addUserContacts')
     .post(users.addUserContacts);
 
+router.route('/chat')
+    .post(users.chat);
+
 module.exports = router;
 
 /*

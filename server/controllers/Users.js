@@ -42,6 +42,15 @@ async function loginPass(req, res, next){
     }
 }
 
+async function chat(req, res, next){
+    try{
+        const chatResponse = await users.chat(req.body.username, req.body.loginKey);
+        return res.status(chatResponse.statusCode).json({msg: chatResponse.msg, data: null});
+    } catch (error) {
+        next(error);
+    }
+};
+
 async function loginIden(req, res, next){
     try {
         const loginIdenResponse = await users.loginIden(req.body.username, req.body.loginKey);
@@ -75,3 +84,4 @@ module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
 module.exports.getUserContacts = getUserContacts;
 module.exports.addUserContacts = addUserContacts;
+module.exports.chat = chat;
