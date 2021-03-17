@@ -9,13 +9,17 @@
   },
   "dependencies": {
     "arraybuffer-loader": "^1.0.8",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "elint": "^2.0.1",
     "emscripten-sdk": "^2.0.14-1",
     "mime-types": "^2.1.29",
     "nodemon": "^2.0.7",
+    "socket.io": "^4.0.0",
+    "socket.io-client": "^4.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-socket.io": "^3.0.10",
     "vue-wasm": "^1.0.0",
     "vuetify": "^2.4.0"
   },

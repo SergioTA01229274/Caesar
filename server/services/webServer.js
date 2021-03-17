@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express');
 const router = require('./Router');
 const config = require('../config/WebServer');
@@ -6,6 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const http = require('http');
 
 let httpServer;
 
@@ -14,7 +14,7 @@ function initialize() {
         const app = express();
         app.use(cookieParser());
         app.use(morgan('combined'));
-        
+
         const corsOptions = {
             origin: true,
             credentials: true
@@ -23,7 +23,7 @@ function initialize() {
         app.use(bodyParser.json());
         app.use('/caesar-api', router);
         httpServer = http.createServer(app);
-
+        const io = require('./socket')(httpServer);
 
         httpServer.listen(config.port)
             .on('listening', () => {

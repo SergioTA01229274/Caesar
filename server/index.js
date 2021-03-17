@@ -33,7 +33,6 @@ async function shutdown(e) {
         err = err || e;
         console.log('Failed to close the db connection', e);
     }*/
-
     console.log('Shutting down the server...');
     try {
         await webServer.close();

@@ -26,8 +26,7 @@ import inputMessageBar from '../components/inputMessageBar.vue'
 import ContactsBar from '../components/ContactsBar.vue';
 import ToolbarUser from '../components/ToolbarUser.vue';
 import TopbarUser from '../components/TopbarUser.vue';
-
-
+import io from 'socket.io-client';
 
 export default {
   name: 'GUIChat',
@@ -38,6 +37,14 @@ export default {
     ChatSection,
     inputMessageBar
   },
+  data() {
+      return {
+          socket: io()
+      }
+  },
+  created() {
+      this.socket.emit('PING');
+  }
 }
 </script>
 
