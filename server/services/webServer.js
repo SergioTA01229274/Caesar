@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const http = require('http');
+const socket = require('./socket');
 
 let httpServer;
 
@@ -23,7 +24,7 @@ function initialize() {
         app.use(bodyParser.json());
         app.use('/caesar-api', router);
         httpServer = http.createServer(app);
-        const io = require('./socket')(httpServer);
+        const ioSocket = socket.initializeSocket(httpServer);
 
         httpServer.listen(config.port)
             .on('listening', () => {

@@ -1,16 +1,20 @@
 
-module.exports = function (httpServer) {
-    tmpIO = require('socket.io')(httpServer, {
+async function initializeSocket(httpServer){
+    const io = require('socket.io')(httpServer, {
         cors: {
-            origin: "http://localhost:8080",
-            methods: ["GET", "POST"]
+            origin: "http://localhost:8080"
         }
     });
-    tmpIO.on('connection', (socket) => {
-        console.log(socket);
+    io.on("connection", (socket) => {
+        socket.on("ClientPing", (message) => {
+            console.log(message);
+        });
+        socket.on("disconnect", () => {
+            console.log("User disconnected !");
+        });
     });
-    tmpIO.on('PING', (socket) => {
-        console.log(socket);
-    });
-    return tmpIO;
-};
+
+    return io;
+}
+
+module.exports.initializeSocket = initializeSocket;
