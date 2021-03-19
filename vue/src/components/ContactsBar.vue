@@ -95,5 +95,6 @@
     #contactsSubHeader {
       font-size: 1.5rem;
       padding-left: 4rem;
+      position: relative;
     }
 </style>

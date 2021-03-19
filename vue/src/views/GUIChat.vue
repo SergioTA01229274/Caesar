@@ -8,8 +8,7 @@
                     <contacts-bar></contacts-bar>
                 </v-col>
                 <v-col cols="9" class="ma-x pa-x">
-                    <!--<toolbar-user></toolbar-user>-->
-                    <public-menu></public-menu>
+                    <toolbar-user></toolbar-user>
                     <br><chat-section cols="9"></chat-section>
                     <br><input-message-bar cols="9" style="padding-top: 0.3rem"></input-message-bar>
                 </v-col>
@@ -51,6 +50,8 @@ export default {
         height: 2em;
         text-align: center;
     }
-
+    #userBar {
+        z-index: 10;
+    }
     
 </style>

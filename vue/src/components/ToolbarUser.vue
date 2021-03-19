@@ -1,12 +1,15 @@
 <template>
     <div id="receiverBar">
-        <h4 id="receiver">Mr. Blue</h4>
+        <public-menu></public-menu>
     </div>
 </template>
 
 <script>
+import publicMenu from './publicMenu.vue'
+
 
 export default {
+  components: { publicMenu },
     name: "ToolbarUser"
 }
 
@@ -15,14 +18,6 @@ export default {
 
 
 <style scoped>
-    #receiver {
-        text-align: left;
-        margin-left: 0.5em;
-        font-size: 2rem;
-        font-weight: 500;
-        color: #F2EEEE;
-    }
-
     #receiverBar {
         background-color: #7983A6 !important;
     }

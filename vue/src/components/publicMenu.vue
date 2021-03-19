@@ -1,39 +1,38 @@
 <template>
     <v-container id='container'>
         <v-row>
-            <v-col cols="12">
-                <div data-app>
+            <v-col>
                     <v-menu 
                         offset-y
                         transition="slide-y-transition"
                         bottom
                     >
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                                dark
-                                block
-                                id = 'btn'
+                            <v-btn     
+                                block 
+                                depressed                          
+                                id='btn'
                                 v-bind="attrs"
                                 v-on="on"
                             >
-                                <h4 id='text' > {{userName}} </h4> 
+                                <h4 id="userText"> {{userName}} </h4> 
                             </v-btn>
                         </template>
-                        <v-list id='list'>
+                        <v-list id="list">
                             <v-list-item
                                 v-for="(item, index) in items"
                                 :key="index"
                             >
+
                                 <v-list-item-content>
-                                    <v-list-item-title v-text="item.title"></v-list-item-title>
+                                    <v-list-item-title v-text="item.title" class="listItemText"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content>
-                                    <v-list-item-title v-text="item.value"></v-list-item-title>
+                                    <v-list-item-title v-text="item.value" class="listItemText"></v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list>
                     </v-menu>
-                </div>
             </v-col>
         </v-row>
     </v-container>
@@ -42,19 +41,21 @@
 <style scoped>
     #btn {
         background-color: #7983A6 !important;
-        text-align: left;
-        margin-left: 0.5em;
         font-size: 2rem;
-        font-weight: 500;
+        font-weight: 400;
         color: #F2EEEE;
+        text-align: left;
     }
     #list {
         background-color: #7983A6 !important;
-        font-size: 2rem;
         color: #F2EEEE;
     }
-    #text {
-        float: left !important;
+    .listItemText {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    #userText {
         text-transform: capitalize;
     }
 </style>
