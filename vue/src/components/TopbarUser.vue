@@ -7,18 +7,17 @@
             <v-spacer></v-spacer>
             <v-col cols="2">
                 <div id="buttonsCont">
-                    <v-btn class="mx-2"
-                    id="sender-btn"
-                    fab>
-                    <v-img src="../assets/CaesarLogo.png" id="vimg"></v-img>
-                </v-btn>
-                <v-btn
-                    class="justify-end mx-2"
-                    id="logout-btn"
-                    fab
-                    dark>
-                    <v-icon>mdi-logout</v-icon>
-                </v-btn>
+                    
+                    <private-menu id="sender-btn" ></private-menu>
+
+                    <v-btn
+                        class="justify-end mx-2"
+                        id="logout-btn"
+                        fab
+                        dark
+                    >
+                        <v-icon>mdi-logout</v-icon>
+                    </v-btn>
                 </div>
             </v-col>
         </v-row>
@@ -26,7 +25,10 @@
 </template>
 
 <script>
+import privateMenu from '../components/privateMenu.vue';
+
 export default {
+  components: { privateMenu },
     name: "TopbarUser"
 }
 </script>
@@ -37,6 +39,7 @@ export default {
         color: #F2EEEE;
         font-weight: 500;
         float: left;
+        margin-top: 1.45rem !important;
     }
     #buttonsCont {
         float: right;
@@ -63,5 +66,6 @@ export default {
         margin-top: 0.25rem;
         height: 3rem;
         width: 3rem;
+        margin-right: 2rem;
     }
 </style>

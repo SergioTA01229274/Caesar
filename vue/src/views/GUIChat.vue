@@ -8,7 +8,8 @@
                     <contacts-bar></contacts-bar>
                 </v-col>
                 <v-col cols="9" class="ma-x pa-x">
-                    <toolbar-user></toolbar-user>
+                    <!--<toolbar-user></toolbar-user>-->
+                    <public-menu></public-menu>
                     <br><chat-section cols="9"></chat-section>
                     <br><input-message-bar cols="9" style="padding-top: 0.3rem"></input-message-bar>
                 </v-col>
@@ -26,6 +27,8 @@ import inputMessageBar from '../components/inputMessageBar.vue'
 import ContactsBar from '../components/ContactsBar.vue';
 import ToolbarUser from '../components/ToolbarUser.vue';
 import TopbarUser from '../components/TopbarUser.vue';
+import publicMenu from '../components/publicMenu.vue';
+import privateMenu from '../components/privateMenu.vue';
 
 
 
@@ -36,7 +39,9 @@ export default {
     TopbarUser,
     ToolbarUser,
     ChatSection,
-    inputMessageBar
+    inputMessageBar,
+    publicMenu,
+    privateMenu
   },
 }
 </script>
