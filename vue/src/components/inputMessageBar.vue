@@ -2,7 +2,7 @@
     <div>
         <v-row>
             <v-col cols="10"><v-text-field id="textInput" color="custom" label="Type a message" solo></v-text-field></v-col>
-            <v-col cols="2" id="buttons"><v-btn large class="inputButton" id="fileButton"><v-icon>mdi-paperclip</v-icon>
+            <v-col cols="2" id="buttons"><v-btn large class="inputButton" id="fileButton" @click="fileSockEvent()"><v-icon>mdi-paperclip</v-icon>
             </v-btn> <v-btn large id="sendButton" class="inputButton" @click="showReq()"><v-icon id="sendIcon">mdi-send</v-icon></v-btn>
             </v-col>
         </v-row>
@@ -32,46 +32,33 @@
 </style>
 
 <script>
-
-/*
-let caesar = WebAssembly.instantiateStreaming(fetch('../plugins/cipher.wasm',{headers:{"Content-Type":"application/wasm"}}))
-.then((obj) => {
-    obj => obj.instance.exports.testFunc()
-});
-*/
-/*
-let caesar =  fetch('../plugins/cipher.wasm', {headers: {"Content-Type":"application/wasm"}});
-WebAssembly.instantiateStreaming(caesar).then((instance) =>{
-    instance.exports.testFunc("addfsf");
-});
-*/
-
-/*
-let caesar = fetch('../plugins/cipher.wasm').then(response => 
-  	response.arrayBuffer()
-  ).then(bytes => 
-    WebAssembly.instantiate(bytes)
-  ).then(obj => {
-      console.log(obj.instance.exports.testFunc());
-  });
-*/
-/*
-let caesar = null;
-import('../plugins/cipherScript.wasm').then((m) => {
-    caesar = Module();
-});
-const extractModule = async (module) => {
-  const { instance } = await module();
-  return instance.exports;
-};
-*/
+import io from 'socket.io-client';
 
 export default {
 
     name:"inputMessageBar",
+    mounted() {
+        const cipherPlugin = document.createElement("script");
+        cipherPlugin.setAttribute(
+        "src",
+        "http://localhost:8080/hello.js"
+        );
+        cipherPlugin.async = true;
+        document.head.appendChild(cipherPlugin);
+    },
+    data: () => {
+        return {socket: io()}
+    },
+    created() {
+      this.socket.connect()
+    },
     methods: {
         showReq() {
-            console.log("sdfdsf");
+            let d= Module.cwrap("sumar", "number");
+            console.log(d());
+        },
+        fileSockEvent() {
+            this.socket.emit('ClientPing', "Hey");
         }
     }
   }

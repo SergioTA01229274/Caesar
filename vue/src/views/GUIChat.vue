@@ -26,8 +26,8 @@ import inputMessageBar from '../components/inputMessageBar.vue'
 import ContactsBar from '../components/ContactsBar.vue';
 import ToolbarUser from '../components/ToolbarUser.vue';
 import TopbarUser from '../components/TopbarUser.vue';
-
-
+import publicMenu from '../components/publicMenu.vue';
+import privateMenu from '../components/privateMenu.vue';
 
 export default {
   name: 'GUIChat',
@@ -36,14 +36,12 @@ export default {
     TopbarUser,
     ToolbarUser,
     ChatSection,
-    inputMessageBar
+    inputMessageBar,
+    publicMenu,
+    privateMenu
   },
 }
 </script>
-
-
-
-
 
 <style scoped>
 
@@ -52,6 +50,8 @@ export default {
         height: 2em;
         text-align: center;
     }
-
+    #userBar {
+        z-index: 10;
+    }
     
 </style>
