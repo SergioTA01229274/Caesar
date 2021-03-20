@@ -1,6 +1,6 @@
 <template>
         <div data-app >
-        <v-menu offset-y>
+        <v-menu offset-y id="privMenuSection">
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn
                         depressed
@@ -36,6 +36,7 @@
     }
     #list {
         background: #79797D;
+        width: 25rem;
     }
     .listItemValue {
         font-size: 1.25rem;
@@ -50,11 +51,11 @@
     export default {
         data: () => ({
       items: [
-        { title: 'Account Registration Date',   value: '10/02/2021'},
-        { title: 'Last Connection',             value: '18/02/2021' },
-        { title: 'IP Address',                  value: '164.23.42.33'},
-        { title: 'Public Key',                  value: 'asdfCSC3d' },
-        { title: 'Private Key Loaded',          value: 'bgdjFSDsd' },
+        { title: 'Registration date',   value: '10/02/2021'},
+        { title: 'Last connection',             value: '18/02/2021' },
+        { title: 'IP address',                  value: '164.23.42.33'},
+        { title: 'Public key',                  value: 'asdfCSC3d' },
+        { title: 'Private key loaded',          value: 'bgdjFSDsd' },
       ],
     }),
     name: 'privateMenu'
