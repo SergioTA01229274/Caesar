@@ -32,8 +32,6 @@
 </style>
 
 <script>
-import io from 'socket.io-client';
-
 export default {
 
     name:"inputMessageBar",
@@ -48,23 +46,11 @@ export default {
     },
     data: () => {
         return {
-            socket: io(),
-            tmpMessage: '',
-            receiver: ''
+            tmpMessage: ''
         }
-    },
-    created() {
-      this.socket.connect();
-      this.socket.on("clientMsg", (msg) => {
-          console.log(msg);
-      });
-      let userConnObj = {contacts: this.$contacts, username: String(this.$username)};
-      this.socket.emit('addUserConn', userConnObj);
     },
     methods: {
         sendFileEvent() {
-            this.receiver = this.tmpMessage;
-            this.tmpMessage = '';
             /*
             let d= Module.cwrap("sumar", "number");
             console.log(d());
@@ -79,7 +65,7 @@ export default {
             let DMObj = {msg: cipherText, integrityCode: MAC, reeiver: this.receiver};
             this.socket.emit("privateMessage", DMObj);
             */
-            this.socket.emit("serverMsg", {receiver: this.receiver, msg: this.tmpMessage});
+            this.$emit("sendMsg", this.tmpMessage);
             this.tmpMessage = '';
         }
     }

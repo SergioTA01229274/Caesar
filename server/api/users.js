@@ -82,22 +82,26 @@ async function loginIden(name, key){
 }
 
 async function getUserContacts(username){
-    const userSnapshot = await usersCollection.doc(username);
+    const userSnapshot = await usersCollection.get();
     let resObj = {msg: 'No contacts found. User has not added any contact.', statusCode: 404, data: null};
-    let contactsArr = await userSnapshot.get().then((doc) => {
-        return doc.data().contacts;
+    var contactsArr = null;
+    userSnapshot.forEach((doc) => {
+        let tmpData = doc.data();
+        if(String(username) == String(doc.id)){
+            contactsArr = tmpData.contacts;
+        }
     });
-
-    if(contactsArr.length > 0){
-        resObj.msg = `${username} has ${contactsArr.length} contacts !`;
-        resObj.statusCode = 200;
-        resObj.data = {userContacts: contactsArr};
+    resObj.msg = `${username} has ${contactsArr.length} contacts !`;
+    resObj.statusCode = 200;
+    resObj.data = {userContacts: contactsArr};
+    if(contactsArr.size == 0){
+        resObj.data = null;
     }
     return resObj;
 }
 
 async function addUserContact(username, contactToAdd){
-    const userSnapshot = await usersCollection.doc(username);
+    const userSnapshot = await usersCollection.doc(username).get();
     let resObj = {msg: 'Contact not added !', statusCode: 400, data: null};
     if(contactToAdd == ''){
         return resObj;
@@ -108,7 +112,7 @@ async function addUserContact(username, contactToAdd){
     let tmpExistingVer = await find(String(contactToAdd));
     var responseMsg = '';
     if(tmpExistingVer.statusCode != 404){
-        contactsArr.push(contactsToAdd);
+        contactsArr.push(contactToAdd);
         responseMsg = `${contactToAdd} added to ${username} contacts list`;
         await userSnapshot.update({contacts: contactsArr});
         return {msg: responseMsg, statusCode: 200, data: {contactsUpdated: contactsArr}};

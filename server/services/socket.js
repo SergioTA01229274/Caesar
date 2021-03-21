@@ -1,4 +1,4 @@
-let userConns = new Map();
+let userConns = {};
 
 async function initializeSocket(httpServer){
     const io = require('socket.io')(httpServer, {
@@ -8,25 +8,28 @@ async function initializeSocket(httpServer){
     });
     io.on("connection", (socket) => {
         socket.on("addUserConn", (usrObj) => {
-            userConns.set(usrObj.username, {userContacts: usrObj.contacts, userSockID: socket.id, userSock: socket});
-            console.log(userConns.keys());
+            userConns[usrObj.username] = {userContacts: usrObj.contacts, userSockID: socket.id, userSock: socket};
+        });
+
+        socket.on("srvMsg", (msgObj) => {
+            if(userConns[msgObj.receiver]){
+                userConns[msgObj.receiver].userSock.emit("clntMsg", {msg: `${msgObj.msg}`});
+            }else{
+                userConns[msgObj.sender].userSock.emit("errMsg", {msg: `${msgObj.receiver} offline`});
+            }
         });
 
         socket.on("disconnect", () => {
             let tmpKey = '';
-            for(let key in userConns.keys()){
+            for(var key in userConns){
                 if(String(userConns[key].userSockID) == String(socket.id)){
                     tmpKey = key;
                     break;
                 }
             }
-            userConns.delete(tmpKey);
-            console.log(userConns.keys());
+            delete userConns[tmpKey];
         });
     });
-
-
-
     return io;
 }
 

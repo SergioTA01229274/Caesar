@@ -14,11 +14,11 @@ router.route('/loginPass')
 router.route('/loginIden')
     .post(users.loginIden);
 
-router.route('/getUserContacts')
+router.route('/getUserContacts/:username?')
     .get(users.getUserContacts);
 
-router.route('/addUserContacts')
-    .post(users.addUserContacts);
+router.route('/addUserContact')
+    .post(users.addUserContact);
 
 module.exports = router;
 

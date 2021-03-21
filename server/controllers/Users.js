@@ -53,14 +53,14 @@ async function loginIden(req, res, next){
 
 async function getUserContacts(req, res, next){
     try {
-        const userConstacts = await users.getUserContacts(req.body.username);
+        const userConstacts = await users.getUserContacts(req.params.username);
         return res.status(userConstacts.statusCode).json({msg: userConstacts.msg, data: userConstacts.data});
     } catch (error) {
         next(error);
     }
 }
 
-async function addUserContacts(req, res, next){
+async function addUserContact(req, res, next){
     try {
         const additionResponse = await users.addUserContact(req.body.username, req.body.contactToAdd);
         return res.status(additionResponse.statusCode).json({msg: additionResponse.msg, data: additionResponse.data});
@@ -74,4 +74,4 @@ module.exports.signUp = signUp;
 module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
 module.exports.getUserContacts = getUserContacts;
-module.exports.addUserContacts = addUserContacts;
+module.exports.addUserContact = addUserContact;
