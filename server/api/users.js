@@ -4,7 +4,7 @@ const usersCollection = db.collection('users');
 
 async function find(username){
     const userSnapshot = await usersCollection.get();
-    let resObj = {msg: 'User not found !', statusCode: 404, data: {}};
+    let resObj = {msg: 'User not found !', statusCode: 404, data:null};
     userSnapshot.forEach((doc) => {
         tmpData = doc.data();
         if(String(doc.id) == username){
@@ -17,8 +17,9 @@ async function find(username){
 }
 
 async function signUp(name, pass){
-    const tmpUserRef = usersCollection.doc(name);
+    const tmpUserRef = await usersCollection.doc(name);
     const tmpPublicKey = crypto.randomBytes(1024).toString('hex');
+    const tmpPrivateKey = crypto.randomBytes(1024).toString('hex');
     const tmpLoginKey = crypto.randomBytes(512).toString('hex');
     let userInfo = {
         password: crypto.createHash('sha256').update(pass).digest('hex'),
@@ -27,10 +28,10 @@ async function signUp(name, pass){
         registerDate: (new Date()).toString(),
         lastLoginDate: (new Date()).toString(),
         contacts: [],
-        online: false
+        ipAddress:''
     }
-    let queryResponse = await tmpUserRef.set(userInfo);
-    return {msg: 'User succesfully added', statusCode: 200, data: queryResponse, userCredentials: {publicKey: tmpPublicKey, loginKey: tmpLoginKey}};
+    await tmpUserRef.set(userInfo);
+    return {msg: 'User succesfully added', statusCode: 200, data: {publicKey: tmpPublicKey, loginKey: tmpLoginKey, privateKey: tmpPrivateKey}};
 }
 
 async function loginPass(name, pass){
@@ -70,10 +71,13 @@ async function loginIden(name, key){
         let tmpData = doc.data();
         generalData = {
             lastLoginDate: tmpData.lastLoginDate,
-            publicKey: tmpData.publicKey
+            publicKey: tmpData.publicKey,
+            registerDate:  tmpData.registerDate,
+            ipAddress: tmpData.ipAddress,
+            contacts: tmpData.contacts
         }
     });
-    userSnapshot.update({online: true, lastLoginDate: (new Date()).toString()});
+    await userSnapshot.update({lastLoginDate: (new Date()).toString()});
     return {msg: 'Identity package succesfully matched.', statusCode: 200, data: generalData};
 }
 
@@ -92,34 +96,24 @@ async function getUserContacts(username){
     return resObj;
 }
 
-async function addUserContacts(username, contactsToAdd){
+async function addUserContact(username, contactToAdd){
     const userSnapshot = await usersCollection.doc(username);
-    let resObj = {msg: 'No contacts added !', statusCode: 400, data: null};
-    if(contactsToAdd.length == 0){
+    let resObj = {msg: 'Contact not added !', statusCode: 400, data: null};
+    if(contactToAdd == ''){
         return resObj;
     }
     let contactsArr = await userSnapshot.get().then((doc) => {
         return doc.data().contacts;
     });
-
-    let individualRes = '';
-    let flag = false;
-    for (let i = 0; i < contactsToAdd.length; i++) {
-        if(contactsArr.includes(contactsToAdd[i])){
-            continue;
-        }
-        flag = true;
-        let tmpExistingVer = await find(contactsToAdd[i]);
-        if(tmpExistingVer.statusCode != 404){
-            contactsArr.push(contactsToAdd[i]);
-            individualRes += `${contactsToAdd[i]}\t added!\n`;
-            continue;
-        }
-    individualRes += `${contactsToAdd[i]}\t not added!\n`; 
+    let tmpExistingVer = await find(String(contactToAdd));
+    var responseMsg = '';
+    if(tmpExistingVer.statusCode != 404){
+        contactsArr.push(contactsToAdd);
+        responseMsg = `${contactToAdd} added to ${username} contacts list`;
+        await userSnapshot.update({contacts: contactsArr});
+        return {msg: responseMsg, statusCode: 200, data: {contactsUpdated: contactsArr}};
     }
-    console.log(individualRes);
-    userSnapshot.update({contacts: contactsArr});
-    return {msg: (flag ? 'No errors when trying to add contacts': 'Cannot add contacts entered.'), statusCode: (flag ? 200: 400), data: (flag ? individualRes: null)};
+    return {msg: `No modifications on ${username} contacts list`, statusCode: 400, data: {contactsUpdated: contactsArr}};
 }
 
 module.exports.find = find;
@@ -127,4 +121,4 @@ module.exports.signUp = signUp;
 module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
 module.exports.getUserContacts = getUserContacts;
-module.exports.addUserContacts = addUserContacts;
+module.exports.addUserContact = addUserContact;
