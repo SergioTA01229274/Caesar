@@ -1,9 +1,12 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 import vuetify from './plugins/vuetify';
-import router from './router/router'
+import router from './router/router';
+import {io} from 'socket.io-client';
 
-Vue.config.productionTip = false
+Vue.use(io('http://localhost:3000/caesar-api', {autoConnect: false}));
+
+Vue.config.productionTip = false;
 
 new Vue({
   vuetify,

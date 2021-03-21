@@ -5,20 +5,21 @@
                 <span id="senderv">Mr. Green</span>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col cols="2">
+            <v-col>
                 <div id="buttonsCont">
-                    <v-btn class="mx-2"
-                    id="sender-btn"
-                    fab>
-                    <v-img src="@/assets/CaesarLogo.png" id="vimg"></v-img>
-                </v-btn>
-                <v-btn
-                    class="justify-end mx-2"
-                    id="logout-btn"
-                    fab
-                    dark>
-                    <v-icon>mdi-logout</v-icon>
-                </v-btn>
+                    <v-row>
+                        <v-col cols="3"><private-menu></private-menu></v-col>
+                        <v-col cols="3">
+                            <v-btn
+                        class="mx-2"
+                        id="logout-btn"
+                        fab
+                        dark
+                    >
+                        <v-icon>mdi-logout</v-icon>
+                    </v-btn>
+                        </v-col>
+                    </v-row>
                 </div>
             </v-col>
         </v-row>
@@ -26,7 +27,10 @@
 </template>
 
 <script>
+import privateMenu from '../components/privateMenu.vue';
+
 export default {
+  components: { privateMenu },
     name: "TopbarUser"
 }
 </script>
@@ -40,15 +44,15 @@ export default {
     }
     #buttonsCont {
         float: right;
+        display: flex;
+        justify-content: flex-end;
     }
     #logout-btn {
         height: 3rem;
         width: 3rem;
-        font-size: 2rem;
         color: #F2EEEE;
         background-color: #D50000;
-        margin-top: 0.25rem;
-        margin-left: 2rem;
+        margin-left: 2.5rem;
     }
     #vimg {
         height: 3em;
@@ -58,10 +62,5 @@ export default {
         padding: 1em;
         margin-right: 9em;
     }
-    #sender-btn {
-        background: none !important;
-        margin-top: 0.25rem;
-        height: 3rem;
-        width: 3rem;
-    }
+    
 </style>
