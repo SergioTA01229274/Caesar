@@ -19,7 +19,7 @@
 }
 </style>
 
-<script>
+<!--<script>
   "use strict";
   const express = require('express');
   const DB = require('./db');
@@ -38,4 +38,4 @@
   export default {
     
   }
-</script>
+</script>-->
