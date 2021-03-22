@@ -10,8 +10,6 @@
 </template>
 
 <style lang="scss">
-    
-
     #header {
         font-family: Roboto;
         font-size: 4.5rem;
@@ -32,7 +30,6 @@
         height: 14.5rem;
         width: 14.5rem;
     }
-
 </style>
 
 <script>

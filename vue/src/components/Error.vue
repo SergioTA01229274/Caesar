@@ -3,7 +3,7 @@
         <v-container fluid>
             <v-row>
                 <div class="footer content" id="headerContainer">
-                        <img src="../assets/CaesarLogo.png" id="caesarLogo">
+                        <img src="@/assets/CaesarLogo.png" id="caesarLogo">
                         <span class="header">404 ERROR</span>
                         <br><span class="header">PAGE NOT FOUND</span>
                 </div>
