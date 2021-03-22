@@ -26,7 +26,7 @@
                 <v-row>
                     <v-col>
                         <v-btn id="btn-upload">
-                            Upload Files
+                            Check Files
                             <v-icon>mdi-arrow-collapse-up</v-icon>
                         </v-btn>
                     </v-col>
@@ -91,7 +91,7 @@ export default {
         margin-left: 15em;
     }
     #btn-upload {
-        background-color: #7983A6;
+        background-color: #00796B;
         color: #F2EEEE;
     }
     #span-key {
