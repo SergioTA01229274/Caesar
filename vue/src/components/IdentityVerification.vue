@@ -38,6 +38,7 @@
 
 <script>
 export default {
+    //login key, private key
     name: "IdentityVerification",
     el: '#app',
     delimiters: ['${', '}'], // Avoid Twig conflicts
@@ -47,6 +48,9 @@ export default {
         }
     },
     methods: {
+        getFileStrings(){
+            localStorage.login_key 
+        },
         onChange() {
             this.filelist = [...this.$refs.file.files];
         },
