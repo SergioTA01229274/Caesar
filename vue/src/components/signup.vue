@@ -18,7 +18,7 @@
             </v-row>
             <v-row>
                 <v-cols cols = '4'>
-                    <v-btn id = 'submitButton'>
+                    <v-btn id = 'submitButton' @click="goToMain()">
                         <label for="submitButtonFor" class = 'buttonLabel'>
                             Submit
                         </label>
@@ -60,6 +60,11 @@
 
 <script>
     export default ({
-        name:'signup'
+        name:'signup',
+        methods: {
+            goToMain(){
+                
+            }
+        }
     })
 </script>

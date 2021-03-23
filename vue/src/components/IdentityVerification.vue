@@ -25,7 +25,7 @@
                 </v-row>
                 <v-row>
                     <v-col>
-                        <v-btn id="btn-upload">
+                        <v-btn id="btn-upload" @click="getFileStrings()">
                             Check Files
                             <v-icon>mdi-arrow-collapse-up</v-icon>
                         </v-btn>
@@ -51,6 +51,10 @@ export default {
         getFileStrings(){
             localStorage.login_key;
             localStorage.private_key;
+            goToChat();
+        },
+        goToChat(){
+
         },
         onChange() {
             this.filelist = [...this.$refs.file.files];

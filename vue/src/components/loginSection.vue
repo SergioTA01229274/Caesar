@@ -6,10 +6,10 @@
             </v-text-field>
             <br><v-text-field class="inputField" label="Password" required type="password" filled rounded dense>
             </v-text-field>
-            <v-btn id="loginButton" class="logButton" large>
+            <v-btn id="loginButton" class="logButton" large @click="goToVerification()">
                 <label for="loginButton" class="buttonLabel">Login</label>
             </v-btn>
-            <br><br><v-btn id="signUpButton" class="logButton" large>
+            <br><br><v-btn id="signUpButton" class="logButton" large @click="goToSignUp()">
                 <label for="signUpButton" class="buttonLabel">Create account</label>
             </v-btn>
             </div>
@@ -59,6 +59,15 @@
 
 <script>
   export default {
-    name:"loginSection"
+    name:"loginSection",
+    methods: {
+        goToVerification(){
+
+        },
+        goToSignUp(){
+            
+        }
+    }
   }
+
 </script>
