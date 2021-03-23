@@ -34,11 +34,11 @@ export default {
   data() {
         return {
             socket: io(),
-            receiver: this.$receiver,
+            receiver: '',
             usernameInStorage: localStorage.username,
             contactsInStorage: [],
             usersConnections: {},
-            rTag: 'Contact'
+            rTag: 'Receiver'
         }
   },
   mounted() {
@@ -76,6 +76,7 @@ export default {
         this.socket.emit("srvMsg", {receiver: this.receiver, msg: tmpMessage, sender: this.usernameInStorage});
     },
     notifyTag(tag){
+        this.receiver = tag;
         this.rTag = tag;
     }
   },
@@ -84,9 +85,7 @@ export default {
     TopbarUser,
     ToolbarUser,
     ChatSection,
-    inputMessageBar,
-    publicMenu,
-    privateMenu
+    inputMessageBar
   },
 }
 </script>

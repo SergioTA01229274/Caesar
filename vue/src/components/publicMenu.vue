@@ -15,7 +15,7 @@
                                 v-bind="attrs"
                                 v-on="on"
                             >
-                                <h4 id="userText"> {{userName}} </h4> 
+                                <h4 id="userText">{{contactTag}}</h4> 
                             </v-btn>
                         </template>
                         <v-list id="list">
@@ -62,15 +62,27 @@
 
 <script>
     export default {
-        data: () => ({
-            userName: 'Mr. Blue',
-            items: [
-                { title: 'IP Address',      value: '187.43.123.65'},
-                { title: 'Public Key',      value: 'adkXDFsdf134' },
-                { title: 'Last Connection', value: '14/02/2021 17:31' },
-                ],
-            }),
         name: 'publicMenu',
+        props: ['contactTag'],
+        data(){
+            return{
+                userName: '',
+                items: [
+                    { title: 'IP Address',      value: '187.43.123.65'},
+                    { title: 'Public Key',      value: 'adkXDFsdf134' },
+                    { title: 'Last Connection', value: '14/02/2021 17:31' },
+                    ],
+            }
+        },
+        watch: {
+            contactTag: {
+                inmediate: true,
+                handler(val, oldVal){
+                    this.userName = val;
+                }
+            }
+        }
+        
         
     }
 </script>

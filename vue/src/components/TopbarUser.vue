@@ -2,7 +2,7 @@
     <v-toolbar style="background-color: #79797D">
         <v-row>
             <v-col class="space-sender">
-                <span id="senderv"> {{username}} </span>
+                <span id="senderv"> Welcome back {{username}} ! </span>
             </v-col>
             <v-spacer></v-spacer>
             <v-col>
@@ -46,6 +46,7 @@ export default {
         color: #F2EEEE;
         font-weight: 500;
         float: left;
+        text-transform: capitalize;
     }
     #buttonsCont {
         float: right;
