@@ -5,9 +5,6 @@ import router from './router/router';
 import {io} from 'socket.io-client';
 
 Vue.prototype.$serverBaseURL = 'http://localhost:3000/caesar-api/';
-Vue.prototype.$receiver = 'trinnity';
-
-
 
 Vue.use(io('http://localhost:3000/caesar-api', {autoConnect: false}));
 

@@ -79,6 +79,7 @@ import axios from 'axios';
                     if(!localStorage.username || localStorage.username != this.usernameInput){
                         localStorage.username = this.usernameInput;
                     }
+                    localStorage.contacts = [];
                 }
             });
         },

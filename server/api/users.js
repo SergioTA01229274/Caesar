@@ -101,20 +101,25 @@ async function getUserContacts(username){
 }
 
 async function addUserContact(username, contactToAdd){
-    const userSnapshot = await usersCollection.doc(username).get();
     let resObj = {msg: 'Contact not added !', statusCode: 400, data: null};
     if(contactToAdd == ''){
         return resObj;
     }
-    let contactsArr = await userSnapshot.get().then((doc) => {
-        return doc.data().contacts;
+    const userSnapshot = await usersCollection.get();
+    let contactsArr = [];
+    userSnapshot.forEach((doc) => {
+        let tmpData = doc.data();
+        if(String(username) == String(doc.id)){
+            contactsArr = tmpData.contacts;
+        }
     });
     let tmpExistingVer = await find(String(contactToAdd));
     var responseMsg = '';
-    if(tmpExistingVer.statusCode != 404){
+    if(tmpExistingVer.statusCode != 404 && contactsArr.indexOf(contactToAdd) == -1){
         contactsArr.push(contactToAdd);
         responseMsg = `${contactToAdd} added to ${username} contacts list`;
-        await userSnapshot.update({contacts: contactsArr});
+        const tmpSnapshot = await usersCollection.doc(username);
+        await tmpSnapshot.update({contacts: contactsArr});
         return {msg: responseMsg, statusCode: 200, data: {contactsUpdated: contactsArr}};
     }
     return {msg: `No modifications on ${username} contacts list`, statusCode: 400, data: {contactsUpdated: contactsArr}};

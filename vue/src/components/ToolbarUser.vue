@@ -1,13 +1,14 @@
 <template>
     <div id="receiverBar">
-        <h4 id="receiver">Mr. Blue</h4>
+        <h4 id="receiver">{{this.tag}}</h4>
     </div>
 </template>
 
 <script>
 
 export default {
-    name: "ToolbarUser"
+    name: "ToolbarUser",
+    props: ['tag']
 }
 
 

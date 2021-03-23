@@ -63,6 +63,7 @@ async function getUserContacts(req, res, next){
 async function addUserContact(req, res, next){
     try {
         const additionResponse = await users.addUserContact(req.body.username, req.body.contactToAdd);
+        await users.addUserContact(req.body.contactToAdd, req.body.username);
         return res.status(additionResponse.statusCode).json({msg: additionResponse.msg, data: additionResponse.data});
     } catch (error) {
         next(error);
