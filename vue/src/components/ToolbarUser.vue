@@ -1,16 +1,31 @@
 <template>
     <div id="receiverBar">
-        <public-menu></public-menu>
+        <public-menu v-bind:contactTag="contactLabel"></public-menu>
     </div>
+    
 </template>
 
 <script>
-import publicMenu from './publicMenu.vue'
+import publicMenu from './publicMenu.vue';
 
 
 export default {
-  components: { publicMenu },
-    name: "ToolbarUser"
+    name: "ToolbarUser",
+    props: ['tag'],
+    data() {
+        return {
+            contactLabel: this.tag
+        }
+    },
+    watch: {
+        tag: {
+            inmediate: true,
+            handler(val, oldVal){
+                this.contactLabel = val;
+            }
+        }
+    },
+    components: { publicMenu },
 }
 
 

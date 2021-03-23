@@ -57,6 +57,7 @@
         { title: 'Public key',                  value: 'asdfCSC3d' },
         { title: 'Private key loaded',          value: 'bgdjFSDsd' },
       ],
+      ipAddress: ''
     }),
     name: 'privateMenu'
     }

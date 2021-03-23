@@ -49,6 +49,7 @@
               v-else
               :key="item.title"
               ripple
+              @click="changeReceiver(item.title)"
             >
             <v-avatar :color="item.avatarColor"><v-icon>
                 {{item.avatar}}
@@ -68,26 +69,65 @@
 </template>
 
 <script>
+//import axios from 'axios';
   export default {
     name:"ContactsBar",
+    props: ['contacts', 'usersConnected'],
     data () {
       return {
+        userContacts: this.contacts,
+        contactsConnection: this.usersConnected,
         items: [
           {
             header: 'Contacts',
           },
-          { divider: true },
-          {
+          { divider: true }
+        ],
+      }
+    },
+    methods: {
+      changeReceiver(tag){
+        this.$emit('changeRTag', tag);
+      }
+    },
+    watch: {
+      contacts: {
+        inmediate: true,
+        handler(val, oldVal){
+          this.userContacts = val;
+            for(var i = 0; i < this.userContacts.length; i++){
+              var tmpColor = 'red';
+              if(String(this.usersConnected[this.userContacts[i]]) == 'Online'){
+                tmpColor = 'green';
+              }
+              this.items.push({
+                avatar: "mdi-sunglasses",
+                avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+                title: String(this.userContacts[i]),
+                subtitle:
+                  `<span class="font-weight-bold" style="font-size: 1rem; color: ${tmpColor} !important">${this.usersConnected[this.userContacts[i]]}</span>`,
+              });
+            }
+        }
+      },
+      usersConnected: {
+        inmediate: true,
+        handler(val, oldVal) {
+          this.contactsConnection = val;
+        }
+      }
+      }
+  }
+
+  /*
+  {
             avatar: "mdi-sunglasses",
             avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
             title: 'Mr. Blue',
             subtitle:
               `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
           }
-        ],
-      }
-    },
-  }
+  */
 </script>
 
 <style lang="scss">

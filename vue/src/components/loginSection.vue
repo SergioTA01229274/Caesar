@@ -2,14 +2,14 @@
     <v-container id="app">
         <form id="loginSection">
             <div id="container">
-                <v-text-field class="inputField" label="Username" hide-details="auto" filled rounded dense>
+                <v-text-field class="inputField" label="Username" hide-details="auto" v-model="usernameInput" filled rounded dense>
             </v-text-field>
-            <br><v-text-field class="inputField" label="Password" required type="password" filled rounded dense>
+            <br><v-text-field class="inputField" label="Password" required type="password" v-model="passwordInput" filled rounded dense>
             </v-text-field>
-            <v-btn id="loginButton" class="logButton" large @click="goToVerification()">
+            <v-btn id="loginButton" class="logButton" large @click="loginReq">
                 <label for="loginButton" class="buttonLabel">Login</label>
             </v-btn>
-            <br><br><v-btn id="signUpButton" class="logButton" large @click="goToSignUp()">
+            <br><br><v-btn id="signUpButton" class="logButton" @click="signUpReq" large>
                 <label for="signUpButton" class="buttonLabel">Create account</label>
             </v-btn>
             </div>
@@ -58,14 +58,37 @@
 </style>
 
 <script>
+import axios from 'axios';
+
   export default {
     name:"loginSection",
+    created() {
+        localStorage.clear();
+    },
+    data(){
+        return{
+            usernameInput: '',
+            passwordInput: ''
+        }
+    },
     methods: {
-        goToVerification(){
-
+        loginReq() {
+            let body = {username: this.usernameInput, password: this.passwordInput}
+            axios.post(this.$serverBaseURL + 'loginPass', body).then(response => {
+                if(response.status == 200){
+                    if(!localStorage.username || localStorage.username != this.usernameInput){
+                        localStorage.username = this.usernameInput;
+                    }
+                    localStorage.contacts = [];
+                }
+            });
         },
-        goToSignUp(){
-            
+        signUpReq() {
+            axios.get(this.$serverBaseURL + 'getUserContacts/' + String(localStorage.username)).then(response => {
+                if(response.status == 200){
+                    localStorage.contacts = response.data.data.userContacts;
+                }
+            });
         }
     }
   }

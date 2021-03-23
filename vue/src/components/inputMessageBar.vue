@@ -1,9 +1,9 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="10"><v-text-field id="textInput" color="custom" label="Type a message" solo></v-text-field></v-col>
-            <v-col cols="2" id="buttons"><v-btn large class="inputButton" id="fileButton" @click="fileSockEvent()"><v-icon>mdi-paperclip</v-icon>
-            </v-btn> <v-btn large id="sendButton" class="inputButton" @click="showReq()"><v-icon id="sendIcon">mdi-send</v-icon></v-btn>
+            <v-col cols="10"><v-text-field id="textInput" color="custom" label="Type a message" v-model="tmpMessage" solo></v-text-field></v-col>
+            <v-col cols="2" id="buttons"><v-btn large class="inputButton" id="fileButton" @click="showReq()"><v-icon>mdi-paperclip</v-icon>
+            </v-btn> <v-btn large id="sendButton" class="inputButton" @click="sendMsgEvent()"><v-icon id="sendIcon">mdi-send</v-icon></v-btn>
             </v-col>
         </v-row>
     </div>
@@ -32,8 +32,6 @@
 </style>
 
 <script>
-import io from 'socket.io-client';
-
 export default {
 
     name:"inputMessageBar",
@@ -47,18 +45,28 @@ export default {
         document.head.appendChild(cipherPlugin);
     },
     data: () => {
-        return {socket: io()}
-    },
-    created() {
-      this.socket.connect()
+        return {
+            tmpMessage: ''
+        }
     },
     methods: {
-        showReq() {
+        sendFileEvent() {
+            /*
             let d= Module.cwrap("sumar", "number");
             console.log(d());
+            */
         },
-        fileSockEvent() {
-            this.socket.emit('ClientPing', "Hey");
+        sendMsgEvent() {
+            /* 
+            let cipherFunc = Module.cwrap("cipher", "string", "string");
+            let computeMAC = Module.cwrap("getMac", "string", "string");
+            let cipherText = cipherFunc(this.tmpMessage);
+            let MAC = computeMAC(cipherText);
+            let DMObj = {msg: cipherText, integrityCode: MAC, reeiver: this.receiver};
+            this.socket.emit("privateMessage", DMObj);
+            */
+            this.$emit("sendMsg", this.tmpMessage);
+            this.tmpMessage = '';
         }
     }
   }
