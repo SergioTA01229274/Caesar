@@ -21,6 +21,9 @@
           <v-btn icon>
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
         </v-toolbar>
 
         <v-list two-line>
@@ -135,5 +138,6 @@
     #contactsSubHeader {
       font-size: 1.5rem;
       padding-left: 4rem;
+      position: relative;
     }
 </style>

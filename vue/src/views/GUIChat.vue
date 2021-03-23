@@ -29,7 +29,6 @@ import TopbarUser from '../components/TopbarUser.vue';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-
 export default {
   name: 'GUIChat',
   data() {
@@ -85,14 +84,12 @@ export default {
     TopbarUser,
     ToolbarUser,
     ChatSection,
-    inputMessageBar
-  }
+    inputMessageBar,
+    publicMenu,
+    privateMenu
+  },
 }
 </script>
-
-
-
-
 
 <style scoped>
 
@@ -101,6 +98,8 @@ export default {
         height: 2em;
         text-align: center;
     }
-
+    #userBar {
+        z-index: 10;
+    }
     
 </style>
