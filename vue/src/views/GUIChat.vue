@@ -1,11 +1,11 @@
 <template>
     <div class="GUIChat">
         <v-container fluid>
-            <topbar-user id="userBar"></topbar-user>
+            <topbar-user id="userBar" v-bind:userInfo="privMenuData"></topbar-user>
             <br>
             <v-row>
                 <v-col cols="3" offset-md="0">
-                    <contacts-bar v-bind:contacts="contactsInStorage" v-bind:usersConnected="usersConnections" @changeRTag="notifyTag"></contacts-bar>
+                    <contacts-bar v-bind:contacts="contactsInStorage" @changeRTag="notifyTag"></contacts-bar>
                 </v-col>
                 <v-col cols="9" class="ma-x pa-x">
                     <toolbar-user v-bind:tag="rTag"></toolbar-user>
@@ -37,19 +37,32 @@ export default {
             receiver: '',
             usernameInStorage: localStorage.username,
             contactsInStorage: [],
-            usersConnections: {},
+            privMenuData: {},
             rTag: 'Receiver'
         }
   },
   mounted() {
-      axios.get(this.$serverBaseURL + `/getUserContacts/${this.usernameInStorage}`).then((response) => {
-            this.contactsInStorage = response.data.data.userContacts;
-            for(var i = 0; i < this.contactsInStorage.length; i++){
-                this.usersConnections[this.contactsInStorage[i]] = 'Offline';
-            }
-            let userConnObj = {contacts: this.contactsInStorage, username: this.usernameInStorage};
-            this.socket.emit('addUserConn', userConnObj);
-      });
+        axios.get(this.$serverBaseURL + `/getUserContacts/${this.usernameInStorage}`).then((response) => {
+                this.contactsInStorage = response.data.data.userContacts;
+                let userConnObj = {contacts: this.contactsInStorage, username: this.usernameInStorage};
+                this.socket.emit('addUserConn', userConnObj);
+        });
+
+        axios.get('https://api.ipify.org?format=json').then((response) => {
+          this.privMenuData.ipAddress = response.data.ip;
+          let body = {username: this.usernameInStorage, ipAddress: this.ipInStorage};
+            axios.post(this.$serverBaseURL + '/updateIP', body).then((response) => {
+                console.log(response);
+            });
+        });
+
+        axios.get(this.$serverBaseURL + `/getUserInfo/${this.usernameInStorage}`).then((response) => {
+                this.privMenuData.publicKey = response.data.data.publicKey.slice(0,10);
+                let tmpLastDate = response.data.data.lastLoginDate.split(" ");
+                this.privMenuData.lastLoginDate = tmpLastDate[2] + '/' + tmpLastDate[1] + '/' + tmpLastDate[3] + ' ' + tmpLastDate[4];
+                let tmpRegDate = response.data.data.registerDate.split(" ");
+                this.privMenuData.registerDate = tmpRegDate[2] + '/' + tmpRegDate[1] + '/' + tmpRegDate[3] + ' ' + tmpRegDate[4];
+        });
   },
   created() {
       this.socket.connect();

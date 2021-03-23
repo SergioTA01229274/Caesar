@@ -125,9 +125,42 @@ async function addUserContact(username, contactToAdd){
     return {msg: `No modifications on ${username} contacts list`, statusCode: 400, data: {contactsUpdated: contactsArr}};
 }
 
+async function updateIP(username, newIP){
+    const userSnapshot = await usersCollection.get();
+    let userIP = '';
+    userSnapshot.forEach((doc) => {
+        let tmpData = doc.data();
+        if(String(username) == String(doc.id)){
+            userIP = tmpData.ipAddress;
+        }
+    });
+    if(String(userIP) == String(newIP)){
+        return {msg: 'No changes applied on IP address', statusCode: 200, data: newIP};
+    }
+    const tmpSnapshot = await usersCollection.doc(username);
+    await tmpSnapshot.update({ipAddress: userIP});
+    return {msg: 'IP address changed successfully', statusCode: 200, data: newIP};
+}
+
+async function getUserInfo(username){
+    const userSnapshot = await usersCollection.get();
+    let userInfo = {};
+    userSnapshot.forEach((doc) => {
+        let tmpData = doc.data();
+        if(String(username) == String(doc.id)){
+            userInfo.publicKey = tmpData.publicKey;
+            userInfo.lastLoginDate = tmpData.lastLoginDate;
+            userInfo.registerDate = tmpData.registerDate;
+        }
+    });
+    return {msg: 'Use wisely user info', statusCode: 200, data: userInfo};
+}
+
 module.exports.find = find;
 module.exports.signUp = signUp; 
 module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
 module.exports.getUserContacts = getUserContacts;
 module.exports.addUserContact = addUserContact;
+module.exports.updateIP = updateIP;
+module.exports.getUserInfo = getUserInfo;

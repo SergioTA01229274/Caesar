@@ -8,7 +8,7 @@
             <v-col>
                 <div id="buttonsCont">
                     <v-row>
-                        <v-col cols="3"><private-menu></private-menu></v-col>
+                        <v-col cols="3"><private-menu v-bind:privInfo="privateUserInfo"></private-menu></v-col>
                         <v-col cols="3">
                             <v-btn
                         class="mx-2"
@@ -31,9 +31,11 @@ import privateMenu from '../components/privateMenu.vue';
 
 export default {
     name: "TopbarUser",
+    props: ['userInfo'],
     data() {
         return {
-            username: localStorage.username
+            username: localStorage.username,
+            privateUserInfo: this.userInfo
         }
     },
   components: { privateMenu },

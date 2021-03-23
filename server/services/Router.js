@@ -17,8 +17,16 @@ router.route('/loginIden')
 router.route('/getUserContacts/:username?')
     .get(users.getUserContacts);
 
+router.route('/getUserInfo/:username?')
+    .get(users.getUserInfo);
+
 router.route('/addUserContact')
     .post(users.addUserContact);
+
+router.route('/updateIP')
+    .post(users.updateIP);
+
+
 
 module.exports = router;
 

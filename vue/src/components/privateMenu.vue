@@ -18,10 +18,10 @@
                         :key="index"
                     >
                         <v-list-item-content>
-                            <v-list-item-title v-text="item.title" class="listItemValue"></v-list-item-title>
+                            <v-list-item-title class="listItemValue">hola</v-list-item-title>
                         </v-list-item-content>
                         <v-list-item-content>
-                            <v-list-item-title v-text="item.value" class="listItemValue"></v-list-item-title>
+                            <v-list-item-title class="listItemValue"></v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
@@ -36,7 +36,7 @@
     }
     #list {
         background: #79797D;
-        width: 25rem;
+        width: 35rem;
     }
     .listItemValue {
         font-size: 1.25rem;
@@ -48,17 +48,17 @@
 </style>
 
 <script>
-    export default {
-        data: () => ({
-      items: [
-        { title: 'Registration date',   value: '10/02/2021'},
-        { title: 'Last connection',             value: '18/02/2021' },
-        { title: 'IP address',                  value: '164.23.42.33'},
-        { title: 'Public key',                  value: 'asdfCSC3d' },
-        { title: 'Private key loaded',          value: 'bgdjFSDsd' },
-      ],
-      ipAddress: ''
-    }),
-    name: 'privateMenu'
+
+export default {
+    name: 'privateMenu',
+    props: ['privInfo'],
+    mounted(){
+        console.log(this.items);
+    },
+    data(){
+        return {
+            items: this.privInfo
+        }
     }
+}
 </script>

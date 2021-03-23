@@ -70,9 +70,29 @@ async function addUserContact(req, res, next){
     }
 }
 
+async function updateIP(req, res, next){
+    try {
+        const ipResponse = await users.updateIP(req.body.username, req.body.ipAddress);
+        return res.status(ipResponse.statusCode).json({msg: ipResponse.msg, data: ipResponse.data});
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function getUserInfo(req, res, next){
+    try {
+        const infoResponse = await users.getUserInfo(req.params.username);
+        return res.status(infoResponse.statusCode).json({msg: infoResponse.msg, data: infoResponse.data});
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports.find = find;
 module.exports.signUp = signUp;
 module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
 module.exports.getUserContacts = getUserContacts;
 module.exports.addUserContact = addUserContact;
+module.exports.updateIP = updateIP;
+module.exports.getUserInfo = getUserInfo;

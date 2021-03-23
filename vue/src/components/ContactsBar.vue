@@ -56,9 +56,6 @@
               </v-icon></v-avatar>
               <v-list-item-content>
                 <v-list-item-title v-html="item.title" style="font-size: 1.5rem"></v-list-item-title>
-                <v-list-item-subtitle
-                  v-html="item.subtitle"
-                ></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </template>
@@ -72,11 +69,10 @@
 //import axios from 'axios';
   export default {
     name:"ContactsBar",
-    props: ['contacts', 'usersConnected'],
+    props: ['contacts'],
     data () {
       return {
         userContacts: this.contacts,
-        contactsConnection: this.usersConnected,
         items: [
           {
             header: 'Contacts',
@@ -96,24 +92,12 @@
         handler(val, oldVal){
           this.userContacts = val;
             for(var i = 0; i < this.userContacts.length; i++){
-              var tmpColor = 'red';
-              if(String(this.usersConnected[this.userContacts[i]]) == 'Online'){
-                tmpColor = 'green';
-              }
               this.items.push({
                 avatar: "mdi-sunglasses",
                 avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
                 title: String(this.userContacts[i]),
-                subtitle:
-                  `<span class="font-weight-bold" style="font-size: 1rem; color: ${tmpColor} !important">${this.usersConnected[this.userContacts[i]]}</span>`,
               });
             }
-        }
-      },
-      usersConnected: {
-        inmediate: true,
-        handler(val, oldVal) {
-          this.contactsConnection = val;
         }
       }
       }
