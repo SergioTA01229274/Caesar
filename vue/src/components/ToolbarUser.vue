@@ -1,6 +1,6 @@
 <template>
     <div id="receiverBar">
-        <public-menu></public-menu>
+        <public-menu>{{this.tag}}</public-menu>
     </div>
 </template>
 
@@ -9,6 +9,7 @@ import publicMenu from './publicMenu.vue'
 
 
 export default {
+    props: ['tag'],
   components: { publicMenu },
     name: "ToolbarUser"
 }

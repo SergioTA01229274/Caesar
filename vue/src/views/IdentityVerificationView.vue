@@ -5,7 +5,7 @@
                     <img src="@/assets/CaesarLogo.png" id="caesarLogo">
                 </v-col>
                 <v-col :cols="8" id="header">
-                    <span>We want to make sure you are Mr. Green
+                    <span> We want to make sure you are {{username}} <br>
                         Please upload your identity package
                     </span>
                 </v-col>
@@ -20,6 +20,11 @@ import IdentityVerification from '../components/IdentityVerification.vue';
 
 export default {
     name: "IdentityVerificationView",
+    data() {
+        return {
+            username: localStorage.username
+        }
+    },
     components: {
         IdentityVerification
     }

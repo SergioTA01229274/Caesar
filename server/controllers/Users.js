@@ -19,7 +19,7 @@ async function signUp(req, res, next){
         const existingUser = await users.find(req.body.username);
         if (existingUser.statusCode == 404) {
             const userAddedResponse = await users.signUp(req.body.username, req.body.password);
-            return res.status(userAddedResponse.statusCode).json({msg: userAddedResponse.msg, data: userAddedResponse.userCredentials});
+            return res.status(userAddedResponse.statusCode).json({msg: userAddedResponse.msg, data: userAddedResponse.data});
         }
         return res.status(403).json({msg: "Cannot add user. User already exists!", data: null});
     } catch (error) {
@@ -35,7 +35,7 @@ async function loginPass(req, res, next){
         }
         const loginPassResponse = await users.loginPass(req.body.username, req.body.password);
             return res.status(loginPassResponse.statusCode).json({
-                msg: loginPassResponse.msg, data: loginPassResponse.userCredentials
+                msg: loginPassResponse.msg, data: loginPassResponse.data
             });
     } catch (error) {
         next(error);
@@ -45,7 +45,7 @@ async function loginPass(req, res, next){
 async function loginIden(req, res, next){
     try {
         const loginIdenResponse = await users.loginIden(req.body.username, req.body.loginKey);
-        return res.status(loginIdenResponse.statusCode).json({msg: loginIdenResponse.msg, data: null});
+        return res.status(loginIdenResponse.statusCode).json({msg: loginIdenResponse.msg, data: loginIdenResponse.data});
     } catch (error) {
         next(error);
     }
@@ -53,16 +53,17 @@ async function loginIden(req, res, next){
 
 async function getUserContacts(req, res, next){
     try {
-        const userConstacts = await users.getUserContacts(req.body.username);
+        const userConstacts = await users.getUserContacts(req.params.username);
         return res.status(userConstacts.statusCode).json({msg: userConstacts.msg, data: userConstacts.data});
     } catch (error) {
         next(error);
     }
 }
 
-async function addUserContacts(req, res, next){
+async function addUserContact(req, res, next){
     try {
-        const additionResponse = await users.addUserContacts(req.body.username, req.body.contactsToAdd);
+        const additionResponse = await users.addUserContact(req.body.username, req.body.contactToAdd);
+        await users.addUserContact(req.body.contactToAdd, req.body.username);
         return res.status(additionResponse.statusCode).json({msg: additionResponse.msg, data: additionResponse.data});
     } catch (error) {
         next(error);
@@ -74,4 +75,4 @@ module.exports.signUp = signUp;
 module.exports.loginPass = loginPass;
 module.exports.loginIden = loginIden;
 module.exports.getUserContacts = getUserContacts;
-module.exports.addUserContacts = addUserContacts;
+module.exports.addUserContact = addUserContact;

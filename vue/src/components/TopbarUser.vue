@@ -2,7 +2,7 @@
     <v-toolbar style="background-color: #79797D">
         <v-row>
             <v-col class="space-sender">
-                <span id="senderv">Mr. Green</span>
+                <span id="senderv"> {{username}} </span>
             </v-col>
             <v-spacer></v-spacer>
             <v-col>
@@ -30,8 +30,13 @@
 import privateMenu from '../components/privateMenu.vue';
 
 export default {
+    name: "TopbarUser",
+    data() {
+        return {
+            username: localStorage.username
+        }
+    },
   components: { privateMenu },
-    name: "TopbarUser"
 }
 </script>
 
