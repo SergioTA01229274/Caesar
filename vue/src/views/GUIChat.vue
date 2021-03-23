@@ -1,7 +1,7 @@
 <template>
     <div class="GUIChat">
         <v-container fluid>
-            <topbar-user id="userBar" v-bind:userInfo="privMenuData"></topbar-user>
+            <topbar-user id="userBar" v-bind:userInfo="privMeduDataFormated"></topbar-user>
             <br>
             <v-row>
                 <v-col cols="3" offset-md="0">
@@ -38,6 +38,7 @@ export default {
             usernameInStorage: localStorage.username,
             contactsInStorage: [],
             privMenuData: {},
+            privMeduDataFormated: [],
             rTag: 'Receiver'
         }
   },
@@ -62,6 +63,11 @@ export default {
                 this.privMenuData.lastLoginDate = tmpLastDate[2] + '/' + tmpLastDate[1] + '/' + tmpLastDate[3] + ' ' + tmpLastDate[4];
                 let tmpRegDate = response.data.data.registerDate.split(" ");
                 this.privMenuData.registerDate = tmpRegDate[2] + '/' + tmpRegDate[1] + '/' + tmpRegDate[3] + ' ' + tmpRegDate[4];
+                let privLabels = {publicKey: 'Public key', registerDate: 'Registration date', lastLoginDate: 'Last connection', ipAddress: 'IP address'};
+                for(var key in this.privMenuData){
+                    this.privMeduDataFormated.push({title: privLabels[key], value: this.privMenuData[key]});
+                }
+                console.log(this.privMenuData);
         });
   },
   created() {

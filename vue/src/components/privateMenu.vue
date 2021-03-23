@@ -18,10 +18,10 @@
                         :key="index"
                     >
                         <v-list-item-content>
-                            <v-list-item-title class="listItemValue">hola</v-list-item-title>
+                            <v-list-item-title v-text="item.title" class="listItemValue"></v-list-item-title>
                         </v-list-item-content>
                         <v-list-item-content>
-                            <v-list-item-title class="listItemValue"></v-list-item-title>
+                            <v-list-item-title v-text="item.value" class="listItemValue"></v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
@@ -52,8 +52,8 @@
 export default {
     name: 'privateMenu',
     props: ['privInfo'],
-    mounted(){
-        console.log(this.items);
+    created(){
+        console.log(this.privInfo);
     },
     data(){
         return {
