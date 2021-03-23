@@ -26,7 +26,7 @@
                 <v-row>
                     <v-col>
                         <v-btn id="btn-upload">
-                            Upload Files
+                            Check Files
                             <v-icon>mdi-arrow-collapse-up</v-icon>
                         </v-btn>
                     </v-col>
@@ -38,6 +38,7 @@
 
 <script>
 export default {
+    //login key, private key
     name: "IdentityVerification",
     el: '#app',
     delimiters: ['${', '}'], // Avoid Twig conflicts
@@ -47,6 +48,10 @@ export default {
         }
     },
     methods: {
+        getFileStrings(){
+            localStorage.login_key;
+            localStorage.private_key;
+        },
         onChange() {
             this.filelist = [...this.$refs.file.files];
         },
@@ -91,7 +96,7 @@ export default {
         margin-left: 15em;
     }
     #btn-upload {
-        background-color: #7983A6;
+        background-color: #00796B;
         color: #F2EEEE;
     }
     #span-key {
