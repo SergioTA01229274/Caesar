@@ -26,7 +26,7 @@
     "socket.io-client": "^4.0.0",
     "sqlite3": "^5.0.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0",
+    "vue-router": "^3.5.1",
     "vue-socket.io": "^3.0.10",
     "vue-wasm": "^1.0.0",
     "vuetify": "^2.4.0"

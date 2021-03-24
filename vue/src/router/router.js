@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import GUIChat from '../views/GUIChat';
 import IdentityVerificationView from '../views/IdentityVerificationView';
 import ErrorView from '../views/ErrorView';
+import ErrorView400 from '../views/ErrorView400';
 import Register from '../views/register';
 
 Vue.use(VueRouter)
@@ -28,8 +29,13 @@ const routes = [
   },
   {
     name: 'Error',
-    path: '/error',
+    path: '/error404',
     component: ErrorView
+  },
+  {
+    name: 'Error400',
+    path: '/error400',
+    component: ErrorView400
   },
   {
     name: 'Register',

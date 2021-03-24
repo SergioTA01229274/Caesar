@@ -22,6 +22,7 @@
                         <label for="submitButtonFor" class = 'buttonLabel'>
                             Submit
                         </label>
+                       
                     </v-btn>
                 </v-cols>
             </v-row>
@@ -59,11 +60,40 @@
 </style>
 
 <script>
+    import VueRouter from 'vue-router';
+    import ErrorView from '../views/ErrorView';
+    import ErrorView400 from '../views/ErrorView400';
+    const router = new VueRouter({
+        mode: 'history',
+        route: [
+            {
+                name: 'login',
+                path: '/',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () => import('../views/login.vue')
+            },
+            {
+                name: 'Error',
+                path: '/error404',
+                component: ErrorView
+            },
+            {
+                name: 'Error400',
+                path: '/error400',
+                component: ErrorView400
+            }
+        ]
+    });
     export default ({
         name:'signup',
         methods: {
             goToMain(){
-                
+                // Navigating to the named route
+                window.history.replaceState({}, document.title, window.location.origin);
+                console.log(window.history.length);
+                this.$router.push({ path: '/error400'});
             }
         }
     })

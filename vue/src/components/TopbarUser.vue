@@ -11,12 +11,13 @@
                         <v-col cols="3"><private-menu></private-menu></v-col>
                         <v-col cols="3">
                             <v-btn
-                        class="mx-2"
-                        id="logout-btn"
-                        fab
-                        dark
-                    >
-                        <v-icon>mdi-logout</v-icon>
+                                class="mx-2"
+                                id="logout-btn"
+                                fab
+                                dark
+                                @click="logOut()"
+                            >
+                                <v-icon>mdi-logout</v-icon>
                     </v-btn>
                         </v-col>
                     </v-row>
@@ -36,7 +37,12 @@ export default {
             username: localStorage.username
         }
     },
-  components: { privateMenu },
+    components: { privateMenu },
+    methods: {
+        logOut(){
+            
+        }
+    }
 }
 </script>
 
