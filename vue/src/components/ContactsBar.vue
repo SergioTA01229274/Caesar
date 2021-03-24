@@ -25,9 +25,8 @@
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-toolbar>
-
-        <v-list two-line>
-          <template v-for="(item, index) in items">
+        <div id="contactsCard">
+          <template v-for="(item, index) in items" >
             <v-subheader
               v-if="item.header"
               :key="item.header"
@@ -44,13 +43,14 @@
               :key="index"
               inset
             ></v-divider>
-
+            
             <v-list-item
               v-else
               :key="item.title"
               ripple
               @click="changeReceiver(item.title)"
             >
+            
             <v-avatar :color="item.avatarColor"><v-icon>
                 {{item.avatar}}
               </v-icon></v-avatar>
@@ -59,7 +59,8 @@
               </v-list-item-content>
             </v-list-item>
           </template>
-        </v-list>
+
+        </div>
       </v-card>
     </v-col>
   </v-row>
@@ -123,5 +124,9 @@
       font-size: 1.5rem;
       padding-left: 4rem;
       position: relative;
+    }
+    #contactsCard {
+      height: 36.25rem !important;
+      overflow: auto;
     }
 </style>

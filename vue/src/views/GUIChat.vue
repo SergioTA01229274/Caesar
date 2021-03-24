@@ -8,7 +8,7 @@
                     <contacts-bar v-bind:contacts="contactsInStorage" @changeRTag="notifyTag"></contacts-bar>
                 </v-col>
                 <v-col cols="9" class="ma-x pa-x">
-                    <toolbar-user v-bind:tag="rTag"></toolbar-user>
+                    <toolbar-user v-bind:tag="[rTag, publicContactInfo]"></toolbar-user>
                     <br><chat-section cols="9"></chat-section>
                     <br><input-message-bar cols="9" style="padding-top: 0.3rem" @sendMsg="sockSend"></input-message-bar>
                 </v-col>
@@ -39,20 +39,32 @@ export default {
             contactsInStorage: [],
             privMenuData: {},
             privMeduDataFormated: [],
-            rTag: 'Receiver'
+            publicContactInfo: [],
+            rTag: ''
         }
   },
   mounted() {
         axios.get(this.$serverBaseURL + `/getUserContacts/${this.usernameInStorage}`).then((response) => {
                 this.contactsInStorage = response.data.data.userContacts;
+                this.rTag = response.data.data.userContacts[0];
+                axios.get(this.$serverBaseURL + `/getContactPublicInfo/${this.rTag}`).then((response) => {
+                    let tmpLastConnDate = response.data.data.lastLoginDate.split(' ');
+                    let formatedDate = tmpLastConnDate[2] + '/' + tmpLastConnDate[1] + '/' + tmpLastConnDate[3] + ' ' + tmpLastConnDate[4]; 
+                    let publicKeyFormated = response.data.data.publicKey.slice(0, 15);
+                    let tmpDataFormated = {ipAddress: response.data.data.ipAddress, lastLoginDate: formatedDate, publicKey: publicKeyFormated};
+                    let publicDataLabels = {ipAddress: 'IP Address', lastLoginDate: 'Last connection', publicKey: 'Public key'};
+                    for(var key in publicDataLabels){
+                        this.publicContactInfo.push({title: publicDataLabels[key], value: tmpDataFormated[key]});
+                    }
+                });
                 let userConnObj = {contacts: this.contactsInStorage, username: this.usernameInStorage};
                 this.socket.emit('addUserConn', userConnObj);
         });
+        
 
         axios.get('https://api.ipify.org?format=json').then((response) => {
           this.privMenuData.ipAddress = response.data.ip;
-          let body = {username: this.usernameInStorage, ipAddress: this.ipInStorage};
-            axios.post(this.$serverBaseURL + '/updateIP', body).then((response) => {
+            axios.post(this.$serverBaseURL + `/updateIP/${this.usernameInStorage}/${this.privMenuData.ipAddress}`).then((response) => {
                 console.log(response);
             });
         });
@@ -67,10 +79,10 @@ export default {
                 for(var key in this.privMenuData){
                     this.privMeduDataFormated.push({title: privLabels[key], value: this.privMenuData[key]});
                 }
-                console.log(this.privMenuData);
         });
   },
   created() {
+
       this.socket.connect();
       this.socket.on("clntMsg", (msgObj) => {
           console.log(msgObj.msg);
@@ -97,6 +109,18 @@ export default {
     notifyTag(tag){
         this.receiver = tag;
         this.rTag = tag;
+        axios.get(this.$serverBaseURL + `/getContactPublicInfo/${this.rTag}`).then((response) => {
+            const tmpArr = [];
+            let publicDataLabels = {ipAddress: 'IP Address', lastLoginDate: 'Last connection', publicKey: 'Public key'};
+            let tmpLastConnDate = response.data.data.lastLoginDate.split(' ');
+            let formatedDate = tmpLastConnDate[2] + '/' + tmpLastConnDate[1] + '/' + tmpLastConnDate[3] + ' ' + tmpLastConnDate[4]; 
+            let publicKeyFormated = response.data.data.publicKey.slice(0, 15);
+            let tmpDataFormated = {ipAddress: response.data.data.ipAddress, lastLoginDate: formatedDate, publicKey: publicKeyFormated};
+            for(var key in publicDataLabels){
+                tmpArr.push({title: publicDataLabels[key], value: tmpDataFormated[key]});
+            }
+            this.publicContactInfo = tmpArr;
+        });
     }
   },
   components: {
@@ -119,5 +143,6 @@ export default {
     #userBar {
         z-index: 10;
     }
+    
     
 </style>

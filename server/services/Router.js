@@ -20,10 +20,14 @@ router.route('/getUserContacts/:username?')
 router.route('/getUserInfo/:username?')
     .get(users.getUserInfo);
 
+router.route('/getContactPublicInfo/:contact?')
+    .get(users.getContactPublicInfo);
+
+
 router.route('/addUserContact')
     .post(users.addUserContact);
 
-router.route('/updateIP')
+router.route('/updateIP/:username?/:ipAddress?')
     .post(users.updateIP);
 
 

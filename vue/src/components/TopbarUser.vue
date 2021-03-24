@@ -8,7 +8,7 @@
             <v-col>
                 <div id="buttonsCont">
                     <v-row>
-                        <v-col cols="3"><private-menu v-bind:privInfo="privateUserInfo"></private-menu></v-col>
+                        <v-col cols="3"><private-menu v-bind:privInfo="userInfo"></private-menu></v-col>
                         <v-col cols="3">
                             <v-btn
                         class="mx-2"
@@ -34,8 +34,7 @@ export default {
     props: ['userInfo'],
     data() {
         return {
-            username: localStorage.username,
-            privateUserInfo: this.userInfo
+            username: localStorage.username
         }
     },
   components: { privateMenu },

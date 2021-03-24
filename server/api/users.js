@@ -16,22 +16,20 @@ async function find(username){
     return resObj;
 }
 
-async function signUp(name, pass){
+async function signUp(name, pass, rsaObj){
     const tmpUserRef = await usersCollection.doc(name);
-    const tmpPublicKey = crypto.randomBytes(1024).toString('hex');
-    const tmpPrivateKey = crypto.randomBytes(1024).toString('hex');
     const tmpLoginKey = crypto.randomBytes(512).toString('hex');
     let userInfo = {
         password: crypto.createHash('sha256').update(pass).digest('hex'),
         loginKey: tmpLoginKey,
-        publicKey: tmpPublicKey,
+        rsaObj: rsaObj,
         registerDate: (new Date()).toString(),
         lastLoginDate: (new Date()).toString(),
         contacts: [],
         ipAddress:''
     }
     await tmpUserRef.set(userInfo);
-    return {msg: 'User succesfully added', statusCode: 200, data: {publicKey: tmpPublicKey, loginKey: tmpLoginKey, privateKey: tmpPrivateKey}};
+    return {msg: 'User succesfully added', statusCode: 200, data: {publicKey: rsaObj, loginKey: tmpLoginKey}};
 }
 
 async function loginPass(name, pass){
@@ -137,8 +135,7 @@ async function updateIP(username, newIP){
     if(String(userIP) == String(newIP)){
         return {msg: 'No changes applied on IP address', statusCode: 200, data: newIP};
     }
-    const tmpSnapshot = await usersCollection.doc(username);
-    await tmpSnapshot.update({ipAddress: userIP});
+    await usersCollection.doc(username).update({ipAddress: newIP});
     return {msg: 'IP address changed successfully', statusCode: 200, data: newIP};
 }
 
@@ -156,6 +153,20 @@ async function getUserInfo(username){
     return {msg: 'Use wisely user info', statusCode: 200, data: userInfo};
 }
 
+async function getContactPublicInfo(contact){
+    const userSnapshot = await usersCollection.get();
+    let contactInfo = {};
+    userSnapshot.forEach((doc) => {
+        let tmpData = doc.data();
+        if(String(contact) == String(doc.id)){
+            contactInfo.ipAddress = tmpData.ipAddress;
+            contactInfo.lastLoginDate = tmpData.lastLoginDate;
+            contactInfo.publicKey = tmpData.publicKey;
+        }
+    });
+    return {msg: 'Contact information gotten successfully', statusCode: 200, data: contactInfo};
+}
+
 module.exports.find = find;
 module.exports.signUp = signUp; 
 module.exports.loginPass = loginPass;
@@ -164,3 +175,4 @@ module.exports.getUserContacts = getUserContacts;
 module.exports.addUserContact = addUserContact;
 module.exports.updateIP = updateIP;
 module.exports.getUserInfo = getUserInfo;
+module.exports.getContactPublicInfo = getContactPublicInfo;

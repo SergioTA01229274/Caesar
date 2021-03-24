@@ -14,7 +14,7 @@
                 </template>
                 <v-list id='list'>
                     <v-list-item
-                        v-for="(item, index) in items"
+                        v-for="(item, index) in privInfo"
                         :key="index"
                     >
                         <v-list-item-content>
@@ -51,14 +51,6 @@
 
 export default {
     name: 'privateMenu',
-    props: ['privInfo'],
-    created(){
-        console.log(this.privInfo);
-    },
-    data(){
-        return {
-            items: this.privInfo
-        }
-    }
+    props: ['privInfo']
 }
 </script>
