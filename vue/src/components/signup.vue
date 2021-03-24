@@ -18,11 +18,10 @@
             </v-row>
             <v-row>
                 <v-cols cols = '4'>
-                    <v-btn id = 'submitButton' @click="goToMain()">
-                        <label for="submitButtonFor" class = 'buttonLabel'>
+                    <v-btn id = 'submitButton' >
+                        <label for="submitButtonFor" class = 'buttonLabel' @click="goToMain()">
                             Submit
-                        </label>
-                       
+                        </label>    
                     </v-btn>
                 </v-cols>
             </v-row>
@@ -91,9 +90,9 @@
         methods: {
             goToMain(){
                 // Navigating to the named route
-                window.history.replaceState({}, document.title, window.location.origin);
-                console.log(window.history.length);
-                this.$router.push({ path: '/error400'});
+                // window.history.replaceState({}, document.title, " ");
+                // console.log(window.history.length);
+                this.$router.push({ path: '/'});
             }
         }
     })
