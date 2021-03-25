@@ -6,7 +6,7 @@
                 </v-col>
                 <v-col cols="8" id="header">
                     <span> We want to make sure you are {{username}} <br>
-                        Please upload your identity package
+                        Please enter your identity package
                     </span>
                 </v-col>
         </v-row>
@@ -50,7 +50,7 @@ export default {
     }
     #header {
         font-family: Roboto;
-        position: fixed;
+        position: absolute;
         left: 20rem;
         font-size: 3rem;
         font-weight: 500;
