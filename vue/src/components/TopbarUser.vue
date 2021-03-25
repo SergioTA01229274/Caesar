@@ -40,6 +40,7 @@ export default {
     },
     methods: {
             logOut(){
+                this.$emit('closeConn');
                 this.$router.push({ path: '/'});
             }
     },

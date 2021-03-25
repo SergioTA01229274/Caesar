@@ -1,7 +1,7 @@
 <template>
     <div class="GUIChat">
         <v-container fluid>
-            <topbar-user id="userBar" v-bind:userInfo="privMeduDataFormated"></topbar-user>
+            <topbar-user id="userBar" v-bind:userInfo="privMeduDataFormated" @closeConn="closeConnection"></topbar-user>
             <br>
             <v-row>
                 <v-col cols="3" offset-md="0">
@@ -103,6 +103,9 @@ export default {
       });
   },
   methods: {
+    closeConnection() {
+        this.socket.disconnect();
+    },
     sockSend(tmpMessage) {
         this.socket.emit("srvMsg", {receiver: this.rTag, msg: tmpMessage, sender: this.usernameInStorage});
     },

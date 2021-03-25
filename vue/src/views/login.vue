@@ -1,14 +1,13 @@
 <template>
     <div id="mainContainer">
-                <div class="footer content" id="headerContainer">
-                    <v-container>
-                        <v-row>
-                            <v-col cols="10"><login-header class="pa-2"></login-header></v-col>
-                            <v-col cols="2"><login-section class="pa-2"></login-section></v-col>
-                        </v-row>
-                    </v-container>
-                    
-                </div>
+        <div class="footer content" id="headerContainer">
+            <v-container>
+                <v-row>
+                    <v-col cols="10"><login-header class="pa-2"></login-header></v-col>
+                    <v-col cols="2"><login-section class="pa-2"></login-section></v-col>
+                </v-row>
+            </v-container>
+        </div>
     </div>
 </template>
 

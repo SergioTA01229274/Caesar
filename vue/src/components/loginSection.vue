@@ -74,7 +74,7 @@ import router from '../router/router'
     },
     methods: {
         loginReq() {
-            let body = {username: this.usernameInput, password: this.passwordInput}
+            let body = {username: this.usernameInput, password: this.passwordInput};
             axios.post(this.$serverBaseURL + 'loginPass', body).then(response => {
                 if(response.status == 200){
                     if(!localStorage.username || localStorage.username != this.usernameInput){
@@ -82,6 +82,8 @@ import router from '../router/router'
                     }
                     this.$router.push({ path: '/verification'});
                 }
+            }).catch((error) => {
+                this.$emit('invalidCredentials', error.response.data.msg);
             });
         },
         signUpReq() {
