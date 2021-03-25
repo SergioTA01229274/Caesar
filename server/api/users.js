@@ -17,9 +17,6 @@ async function find(username){
 }
 
 async function signUp(name, pass, rsaObj){
-    if(String(name) == ''){
-        return {msg: 'Cannot add user. Missing data', statusCode: 400, data: null};
-    }
     const tmpUserRef = await usersCollection.doc(name);
     const tmpLoginKey = crypto.randomBytes(512).toString('hex');
     let userInfo = {
@@ -71,7 +68,11 @@ async function loginIden(name, key){
     userSnapshot.get().then((doc) => {
         let tmpData = doc.data();
         generalData = {
-            publicKey: tmpData.publicKey
+            lastLoginDate: tmpData.lastLoginDate,
+            publicKey: tmpData.publicKey,
+            registerDate:  tmpData.registerDate,
+            ipAddress: tmpData.ipAddress,
+            contacts: tmpData.contacts
         }
     });
     await userSnapshot.update({lastLoginDate: (new Date()).toString()});
