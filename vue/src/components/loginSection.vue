@@ -4,7 +4,7 @@
             <div id="container">
                 <v-text-field class="inputField" label="Username" hide-details="auto" v-model="usernameInput" filled rounded dense>
             </v-text-field>
-            <br><v-text-field class="inputField" label="Password" required type="password" v-model="passwordInput" filled rounded dense>
+            <br><v-text-field class="inputField" label="Password" required type="password" v-model="passwordInput" filled rounded dense @keyup.enter="loginReq">
             </v-text-field>
             <v-btn id="loginButton" class="logButton" large @click="loginReq">
                 <label for="loginButton" class="buttonLabel">Login</label>
