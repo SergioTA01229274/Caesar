@@ -12,6 +12,6 @@
 
 <script>
   export default {
-    name:"chatSection"
+    name:"chatSection",
   }
 </script>
