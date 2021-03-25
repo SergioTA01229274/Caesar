@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style scoped>
     #compContainer {
         position: fixed !important;
         left: 22.5rem;

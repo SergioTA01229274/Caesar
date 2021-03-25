@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="identityVerification-app">
         <v-container id="container">
             <v-container id="container-inside">
                 <v-row @dragover="dragover" @dragleave="dragleave" @drop="drop">
@@ -25,8 +25,8 @@
                 </v-row>
                 <v-row>
                     <v-col>
-                        <v-btn id="btn-upload">
-                            Upload Files
+                        <v-btn id="btn-upload" @click="verifyKeys()">
+                            Verify keys
                             <v-icon>mdi-arrow-collapse-up</v-icon>
                         </v-btn>
                     </v-col>
@@ -39,7 +39,6 @@
 <script>
 export default {
     name: "IdentityVerification",
-    el: '#app',
     delimiters: ['${', '}'], // Avoid Twig conflicts
     data() {
         return {
@@ -47,6 +46,9 @@ export default {
         }
     },
     methods: {
+        verifyKeys(){
+            this.$router.push({path: '/chat'});
+        },
         onChange() {
             this.filelist = [...this.$refs.file.files];
         },
@@ -79,7 +81,7 @@ export default {
 </script>
 
 <style scoped>
-    #app {
+    #identityVerification-app {
         width: 24rem;
     }
     #container {

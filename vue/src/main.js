@@ -6,6 +6,7 @@ import {io} from 'socket.io-client';
 
 Vue.prototype.$serverBaseURL = 'http://localhost:3000/caesar-api/';
 
+
 Vue.use(io('http://localhost:3000/caesar-api', {autoConnect: false}));
 
 Vue.config.productionTip = false;

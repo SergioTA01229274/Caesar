@@ -1,18 +1,22 @@
 <template>
     <div class="registerDiv">
-        <div id="mainContainer">
-            <v-row>
-                    <v-col :cols="2">
-                        <img src="@/assets/CaesarLogo.png" id='ceasarLogo'>
-                    </v-col>
-                    <v-col :cols="6" id = 'header'>
-                        <span>
-                            Create an account and start communicating securely
-                        </span>
-                    </v-col>
-            </v-row>
-        </div>
-        <signup id="registerForm"></signup>
+        <v-row id="headerContainer" cols="12">
+                <v-row>
+                        <v-col cols="2">
+                            <img src="@/assets/CaesarLogo.png" id='ceasarLogo'>
+                        </v-col>
+                        <v-col cols="6" id ='header'>
+                            <span>
+                                Create an account and start communicating securely
+                            </span>
+                        </v-col>
+                </v-row>
+        </v-row>
+        <v-row id="registerContainer">
+            <div>
+                <signup id="registerForm"></signup>
+            </div>
+        </v-row>
     </div>
 </template>
 
@@ -28,28 +32,33 @@ import signup from '../components/signup.vue'
 </script>
 
 <style scoped>
-    #registerForm {
-        margin-left: 12.5rem;
+    #registerContainer{
+        justify-content: center;
+    }
+    #headerContainer{
+        margin-left: 15rem;
         margin-top: 2rem;
+    }
+    #registerForm {
+        margin-top: 1rem;
     }
     #mainContainer {
         margin-top: 2rem;
-        margin-left: 17.5rem;
     }
     #header{
         font-family: Roboto;
-        position: fixed;
+        position: relative;
         font-size: 3rem;
         font-weight: 500;
         color: #000001;
         margin-top: 5rem;
-        margin-left: 10rem;
+        margin-left: 2.5rem;
     }
     #ceasarLogo{
         width:15rem;
         height:15rem;
         float:left;
-        margin-left: 1em;
-        margin-top: 1em;
+        margin-left: 1rem;
+        margin-top: 1rem;
     }
 </style>

@@ -17,7 +17,7 @@
     </v-container>
 </template>
 
-<style lang="scss">
+<style scoped>
     #app {
         width: 24rem;
     }
@@ -59,6 +59,7 @@
 
 <script>
 import axios from 'axios';
+import router from '../router/router'
 
   export default {
     name:"loginSection",
@@ -79,16 +80,12 @@ import axios from 'axios';
                     if(!localStorage.username || localStorage.username != this.usernameInput){
                         localStorage.username = this.usernameInput;
                     }
-                    localStorage.contacts = [];
+                    this.$router.push({ path: '/verification'});
                 }
             });
         },
         signUpReq() {
-            axios.get(this.$serverBaseURL + 'getUserContacts/' + String(localStorage.username)).then(response => {
-                if(response.status == 200){
-                    localStorage.contacts = response.data.data.userContacts;
-                }
-            });
+            router.push({path: '/signUp'});
         }
     }
   }

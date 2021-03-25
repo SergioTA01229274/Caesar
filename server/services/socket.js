@@ -12,6 +12,7 @@ async function initializeSocket(httpServer){
         });
 
         socket.on("srvMsg", (msgObj) => {
+            console.log(msgObj);
             if(userConns[msgObj.receiver]){
                 userConns[msgObj.receiver].userSock.emit("clntMsg", {msg: `${msgObj.msg}`});
             }else{

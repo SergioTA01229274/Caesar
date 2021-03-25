@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style scoped>
     
     #sendButton {
         margin-left: 0rem;

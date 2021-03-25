@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     sockSend(tmpMessage) {
-        this.socket.emit("srvMsg", {receiver: this.receiver, msg: tmpMessage, sender: this.usernameInStorage});
+        this.socket.emit("srvMsg", {receiver: this.rTag, msg: tmpMessage, sender: this.usernameInStorage});
     },
     notifyTag(tag){
         this.receiver = tag;

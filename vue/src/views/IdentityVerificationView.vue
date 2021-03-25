@@ -1,16 +1,17 @@
 <template>
     <div>
-        <v-row id="headerContainer" class="footer content">
-                <v-col :cols="2">
+        <v-row id="headerContainer" class="footer content identityVerification-container">
+                <v-col cols="2">
                     <img src="@/assets/CaesarLogo.png" id="caesarLogo">
                 </v-col>
-                <v-col :cols="8" id="header">
+                <v-col cols="8" id="header">
                     <span> We want to make sure you are {{username}} <br>
                         Please upload your identity package
                     </span>
                 </v-col>
         </v-row>
         <div><identity-verification id="fileSection"></identity-verification></div>
+        
     </div>
 </template>
 
