@@ -9,7 +9,7 @@
                 </v-col>
                 <v-col cols="9" class="ma-x pa-x">
                     <toolbar-user v-bind:tag="[rTag, publicContactInfo]"></toolbar-user>
-                    <br><chat-section cols="9"></chat-section>
+                    <br><chat-section cols="9" v-bind:msgInfo="tmpMessageList"></chat-section>
                     <br><input-message-bar cols="9" style="padding-top: 0.3rem" @sendMsg="sockSend"></input-message-bar>
                 </v-col>
             </v-row>
@@ -40,7 +40,9 @@ export default {
             privMenuData: {},
             privMeduDataFormated: [],
             publicContactInfo: [],
-            rTag: ''
+            rTag: '',
+            messageList: {},
+            tmpMessageList: []
         }
   },
   mounted() {
@@ -85,12 +87,13 @@ export default {
 
       this.socket.connect();
       this.socket.on("clntMsg", (msgObj) => {
-          console.log(msgObj.msg);
+        this.messageList[this.rTag].push({sender: msgObj.sender, msg: msgObj.msg});
+        console.log(this.messageList[this.rTag]);
       });
 
         this.socket.on("connectionUpdate", (updateUser) => {
             console.log(`${updateUser} just arrive`);
-          this.usersConnections[updateUser] = 'Online';
+            this.usersConnections[updateUser] = 'Online';
       });
 
       this.socket.on("disconnectionUpdate", (updateUser) => {
@@ -99,6 +102,7 @@ export default {
       });
 
       this.socket.on("errMsg", (errObj) => {
+          this.messageList[this.rTag].push({sender: errObj.sender, msg: errObj.msg});
           console.log(errObj.msg);
       });
   },
@@ -107,11 +111,20 @@ export default {
         this.socket.disconnect();
     },
     sockSend(tmpMessage) {
+        if(this.messageList[this.rTag]){
+            this.messageList[this.rTag].push({sender: this.usernameInStorage, msg: tmpMessage});
+        }else{
+            this.messageList[this.rTag] = [];
+            this.messageList[this.rTag].push({sender: this.usernameInStorage, msg: tmpMessage});
+        }
+        this.tmpMessageList = this.messageList[this.rTag];
+        console.log(this.messageList);
         this.socket.emit("srvMsg", {receiver: this.rTag, msg: tmpMessage, sender: this.usernameInStorage});
     },
     notifyTag(tag){
         this.receiver = tag;
         this.rTag = tag;
+        this.tmpMessageList = this.messageList[this.rTag];
         axios.get(this.$serverBaseURL + `/getContactPublicInfo/${this.rTag}`).then((response) => {
             const tmpArr = [];
             let publicDataLabels = {ipAddress: 'IP Address', lastLoginDate: 'Last connection', publicKey: 'Public key'};

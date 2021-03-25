@@ -15,7 +15,7 @@ async function initializeSocket(httpServer){
             if(userConns[msgObj.receiver]){
                 userConns[msgObj.receiver].userSock.emit("clntMsg", {msg: `${msgObj.msg}`, sender: msgObj.sender});
             }else{
-                userConns[msgObj.sender].userSock.emit("errMsg", {msg: `${msgObj.receiver} offline. Couldn't send: ${msgObj.msg}`});
+                userConns[msgObj.sender].userSock.emit("errMsg", {msg: `${msgObj.receiver} offline. Couldn't send: ${msgObj.msg}`, sender: msgObj.sender});
             }
         });
 
