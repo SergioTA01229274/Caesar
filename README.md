@@ -39,7 +39,6 @@ npm run build
 ## Common routes
 
 Webpage `http://localhost:8080/`
-
 Serve `port: 3000`
 
 ### Customize configuration
