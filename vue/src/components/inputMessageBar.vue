@@ -44,7 +44,7 @@ export default {
         cipherPlugin.async = true;
         document.head.appendChild(cipherPlugin);
     },
-    data: () => {
+    data (){
         return {
             tmpMessage: ''
         }
@@ -67,6 +67,7 @@ export default {
             */
             this.$emit("sendMsg", this.tmpMessage);
             this.tmpMessage = '';
+            // send event to GUIChat as well to handle front
         }
     }
   }
