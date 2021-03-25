@@ -1,11 +1,11 @@
 <template>
     <v-toolbar style="background-color: #79797D">
         <v-row>
-            <v-col class="space-sender">
+            <v-col class="space-sender" cols="6">
                 <span id="senderv"> Welcome back {{username}} ! </span>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col>
+            <v-col cols="4">
                 <div id="buttonsCont">
                     <v-row>
                         <v-col cols="3"><private-menu v-bind:privInfo="userInfo"></private-menu></v-col>
@@ -15,6 +15,7 @@
                         id="logout-btn"
                         fab
                         dark
+                        @click="logOut()"
                     >
                         <v-icon>mdi-logout</v-icon>
                     </v-btn>
@@ -37,7 +38,12 @@ export default {
             username: localStorage.username
         }
     },
-  components: { privateMenu },
+    methods: {
+            logOut(){
+                this.$router.push({ path: '/'});
+            }
+    },
+    components: { privateMenu },
 }
 </script>
 

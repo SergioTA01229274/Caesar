@@ -115,7 +115,7 @@
   */
 </script>
 
-<style lang="scss">
+<style scoped>
     .b {
       font-size: 1.5em;
       color: #F2EEEE;

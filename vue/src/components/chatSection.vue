@@ -3,7 +3,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style scoped>
     #messagesSection {
         background-color: #FFFFFF;
         height: 31rem;

@@ -9,7 +9,7 @@
         </v-row>
 </template>
 
-<style lang="scss">
+<style scoped>
     
 
     #header {

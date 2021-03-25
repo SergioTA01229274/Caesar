@@ -12,7 +12,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style scoped>
     #headerContainer {
         position: fixed;
         top: 7.5rem;
