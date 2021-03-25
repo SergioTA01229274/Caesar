@@ -6,7 +6,7 @@
             <li class="messageDisplayed" v-for="msg in msgInfo" :key="msg" v-bind:class="{user: msg.sender==username}">
               <v-row>
                 <span>{{msg.sender}}: {{msg.msg}}</span>
-              </v-row><br>
+              </v-row>
             </li>
           </ul>
         </div>
@@ -22,9 +22,10 @@
     }
     .messageDisplayed {
       text-align: left;
-      font-size: 2rem;
-      color: blue; 
+      font-size: 1.5rem;
+      color: #555050; 
       margin-left: 3rem;
+      margin-top: 2rem;
       list-style-type: none;
       font-family: Roboto;
     }
