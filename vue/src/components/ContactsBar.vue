@@ -14,6 +14,7 @@
           <v-text-field
            class="b"
            dense
+           v-model="friendToAdd"
            >Search contact</v-text-field>
 
           <v-spacer></v-spacer>
@@ -21,7 +22,7 @@
           <v-btn icon>
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
-          <v-btn icon>
+          <v-btn icon @click="addContatc()">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-toolbar>
@@ -67,13 +68,15 @@
 </template>
 
 <script>
-//import axios from 'axios';
+import axios from 'axios';
   export default {
     name:"ContactsBar",
     props: ['contacts'],
     data () {
       return {
         userContacts: this.contacts,
+        friendToAdd: '',
+        usernameInStor: localStorage.username,
         items: [
           {
             header: 'Contacts',
@@ -85,6 +88,15 @@
     methods: {
       changeReceiver(tag){
         this.$emit('changeRTag', tag);
+      },
+      addContatc(){
+        let body = {username: this.usernameInStor, contactToAdd: this.friendToAdd};
+            axios.post(this.$serverBaseURL + 'addUserContact', body).then(response => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            });
+        this.friendToAdd = '';
       }
     },
     watch: {
@@ -103,16 +115,6 @@
       }
       }
   }
-
-  /*
-  {
-            avatar: "mdi-sunglasses",
-            avatarColor: '#' + Math.floor(Math.random()*16777215).toString(16),
-            title: 'Mr. Blue',
-            subtitle:
-              `<span class="font-weight-bold" style="font-size: 1rem; color: green !important">Online</span>`,
-          }
-  */
 </script>
 
 <style scoped>
