@@ -87,7 +87,7 @@ export default {
 
       this.socket.connect();
       this.socket.on("clntMsg", (msgObj) => {
-        this.messageList[this.rTag].push({sender: msgObj.sender, msg: msgObj.msg});
+        this.messageList[this.rTag].push({sender: msgObj.sender, msg: msgObj.msg, receiver: msgObj.receiver, rFlag: true});
         console.log(this.messageList[this.rTag]);
       });
 
@@ -102,7 +102,7 @@ export default {
       });
 
       this.socket.on("errMsg", (errObj) => {
-          this.messageList[this.rTag].push({sender: errObj.sender, msg: errObj.msg});
+          this.messageList[this.rTag].push({sender: errObj.sender, msg: errObj.msg, receiver: errObj.receiver});
           console.log(errObj.msg);
       });
   },
@@ -112,10 +112,10 @@ export default {
     },
     sockSend(tmpMessage) {
         if(this.messageList[this.rTag]){
-            this.messageList[this.rTag].push({sender: this.usernameInStorage, msg: tmpMessage});
+            this.messageList[this.rTag].push({sender: this.usernameInStorage, msg: tmpMessage, receiver: this.rTag});
         }else{
             this.messageList[this.rTag] = [];
-            this.messageList[this.rTag].push({sender: this.usernameInStorage, msg: tmpMessage});
+            this.messageList[this.rTag].push({sender: this.usernameInStorage, msg: tmpMessage, receiver: this.rTag});
         }
         this.tmpMessageList = this.messageList[this.rTag];
         console.log(this.messageList);
