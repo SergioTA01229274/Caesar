@@ -11,12 +11,10 @@
                 </v-col>
         </v-row>
         <div><identity-verification id="fileSection"></identity-verification></div>
-        
     </div>
 </template>
 
 <script>
-
 import IdentityVerification from '../components/IdentityVerification.vue';
 
 export default {
@@ -33,11 +31,9 @@ export default {
 </script>
 
 <style scoped>
-
     #fileSection {
         margin-left: 10rem;
     }
-
     #headerContainer {
         margin-top: 2.5rem;
         margin-left: 5rem;

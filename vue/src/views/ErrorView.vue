@@ -4,13 +4,6 @@
     </div>
 </template>
 
-<style scoped>
-    #compContainer {
-        position: fixed !important;
-        left: 22.5rem;
-    }
-</style>
-
 <script>
 export default {
     name: "ErrorView",
@@ -20,3 +13,10 @@ export default {
 }
 import Error from '../components/Error.vue';
 </script>
+
+<style scoped>
+    #compContainer {
+        position: fixed !important;
+        left: 22.5rem;
+    }
+</style>

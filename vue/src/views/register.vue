@@ -1,16 +1,16 @@
 <template>
     <div class="registerDiv">
         <v-row id="headerContainer" cols="12">
-                <v-row>
-                        <v-col cols="2">
-                            <img src="@/assets/CaesarLogo.png" id='ceasarLogo'>
-                        </v-col>
-                        <v-col cols="6" id ='header'>
-                            <span>
-                                Create an account and start communicating securely
-                            </span>
-                        </v-col>
-                </v-row>
+            <v-row>
+                <v-col cols="2">
+                    <img src="@/assets/CaesarLogo.png" id='ceasarLogo'>
+                </v-col>
+                <v-col cols="6" id ='header'>
+                    <span>
+                        Create an account and start communicating securely
+                    </span>
+                </v-col>
+            </v-row>
         </v-row>
         <v-row id="registerContainer">
             <div>
@@ -21,14 +21,14 @@
 </template>
 
 <script>
-export default {
+import signup from '../components/signup.vue'
 
+export default {
     name:'register',
     components: {
         signup
     }
 }
-import signup from '../components/signup.vue'
 </script>
 
 <style scoped>

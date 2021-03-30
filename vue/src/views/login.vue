@@ -11,21 +11,9 @@
     </div>
 </template>
 
-<style scoped>
-    #headerContainer {
-        position: fixed;
-        top: 7.5rem;
-        left: 2.5rem;
-    }
-</style>
-
-
 <script>
 import LoginHeader from '../components/loginHeader.vue'
 import LoginSection from '../components/loginSection.vue'
-
-
-
 // @ is an alias to /src
 
 export default { // When we export our view, we have to specify the components and the name
@@ -33,6 +21,14 @@ export default { // When we export our view, we have to specify the components a
   components: {
     LoginHeader,
     LoginSection
-    },
+    }
 }
 </script>
+
+<style scoped>
+    #headerContainer {
+        position: fixed;
+        top: 7.5rem;
+        left: 2.5rem;
+    }
+</style>

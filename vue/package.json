@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "elint": "^2.0.1",
     "emscripten-sdk": "^2.0.14-1",
+    "es6-promise": "^4.2.8",
     "mime-types": "^2.1.29",
     "nodemon": "^2.0.7",
     "socket.io": "^4.0.0",
@@ -21,7 +22,8 @@
     "vue-router": "^3.2.0",
     "vue-socket.io": "^3.0.10",
     "vue-wasm": "^1.0.0",
-    "vuetify": "^2.4.0"
+    "vuetify": "^2.4.0",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
