@@ -65,7 +65,9 @@ export default {
             let DMObj = {msg: cipherText, integrityCode: MAC, reeiver: this.receiver};
             this.socket.emit("privateMessage", DMObj);
             */
-            this.$emit("sendMsg", this.tmpMessage);
+            if (this.tmpMessage.localeCompare('')!=0) {
+                this.$emit("sendMsg", this.tmpMessage);
+            }
             this.tmpMessage = '';
             // send event to GUIChat as well to handle front
         }
