@@ -74,7 +74,6 @@ static char * getE(mpz_t phi)
     }
     gmp_randclear(rstate);
     char * tmp = mpz_get_str(NULL,BASE,rand);
-    int i = mpz_get_ui(gcd);
     mpz_clear(rand);
     mpz_clear(gcd);
     return tmp;
@@ -95,10 +94,6 @@ void generateKeyJSON(){
           q,
           phi_mpz,
           e_mpz;
-    char * n, 
-         * phi,
-         * e, 
-         * d;
     mpz_init(p);
     mpz_init(q);
     mpz_init(phi_mpz);
@@ -106,12 +101,12 @@ void generateKeyJSON(){
     mpz_set_str(p,prime(),BASE);
     sleep(2);
     mpz_set_str(q,prime(),BASE);
-    n = getN(p,q),
-    phi = getPHI(p,q);
+    char * n = getN(p,q);
+    char * phi = getPHI(p,q);
     mpz_set_str(phi_mpz,phi,BASE);
-    e = getE(phi_mpz);
+    char * e = getE(phi_mpz);
     mpz_set_str(e_mpz,e,BASE);
-    d = getD(e_mpz,phi_mpz);
+    char * d = getD(e_mpz,phi_mpz);
 
     FILE *fp;
     fp = fopen("key.json","w");
@@ -119,17 +114,29 @@ void generateKeyJSON(){
     {
         printf("Error, Failed to open the file! \n");
     }
+    mpz_t b2b_n,
+          b2b_e,
+          b2b_d;
+    mpz_init(b2b_n);
+    mpz_init(b2b_e);
+    mpz_init(b2b_d);
+    mpz_set_str(b2b_n,n,BASE);
+    mpz_set_str(b2b_e,e,BASE);
+    mpz_set_str(b2b_d,d,BASE);
     fprintf(fp, "{\n");
     fprintf(fp, "\t\"public\":{\n");
-    fprintf(fp, "\t\t\"n\": \"%s\",\n", n);
-    fprintf(fp, "\t\t\"e\": \"%s\"\n", e);
+    fprintf(fp, "\t\t\"n\": \"%s\",\n", mpz_get_str(NULL,16,b2b_n));
+    fprintf(fp, "\t\t\"e\": \"%s\"\n", mpz_get_str(NULL,16,b2b_e));
     fprintf(fp, "\t}\n,");
     fprintf(fp, "\t\"private\":{\n");
-    fprintf(fp, "\t\t\"n\": \"%s\",\n", n);
-    fprintf(fp, "\t\t\"d\": \"%s\"\n", d);
+    fprintf(fp, "\t\t\"n\": \"%s\",\n", mpz_get_str(NULL,16,b2b_n));
+    fprintf(fp, "\t\t\"d\": \"%s\"\n", mpz_get_str(NULL,16,b2b_d));
     fprintf(fp, "\t}\n");
     fprintf(fp, "}\n");
     fclose(fp);
+    mpz_clear(b2b_n);
+    mpz_clear(b2b_e);
+    mpz_clear(b2b_d);
     mpz_clear(p);
     mpz_clear(q);
     mpz_clear(phi_mpz);
@@ -158,13 +165,25 @@ char * generateKey(){
     e = getE(phi_mpz);
     mpz_set_str(e_mpz,e,BASE);
     d = getD(e_mpz,phi_mpz);
-    char * tmp = malloc((strlen(n)+strlen(e)+strlen(d))*sizeof(char*) + 1);
-    strcat(tmp,n);
+    mpz_t b2b_n,
+          b2b_e,
+          b2b_d;
+    mpz_init(b2b_n);
+    mpz_init(b2b_e);
+    mpz_init(b2b_d);
+    mpz_set_str(b2b_n,n,BASE);
+    mpz_set_str(b2b_e,e,BASE);
+    mpz_set_str(b2b_d,d,BASE);
+    char * tmp = calloc((strlen(n)+strlen(e)+strlen(d)) + 1, sizeof(char*));
+    strcat(tmp,mpz_get_str(NULL,16,b2b_n));
     strcat(tmp,",");
-    strcat(tmp,e);
+    strcat(tmp,mpz_get_str(NULL,16,b2b_e));
     strcat(tmp,",");
-    strcat(tmp,d);
+    strcat(tmp,mpz_get_str(NULL,16,b2b_d));
     strcat(tmp,",");
+    mpz_clear(b2b_n);
+    mpz_clear(b2b_e);
+    mpz_clear(b2b_d);
     return tmp;
 }
 
@@ -197,15 +216,17 @@ char * encryption(char * message, char * n, char * e)
     mpz_init(e_mpz);
     mpz_init(m_mpz);
     mpz_init(output);
-    mpz_set_str(n_mpz,n,BASE);
-    mpz_set_str(e_mpz,e,BASE);
+    mpz_set_str(n_mpz,n,16);
+    mpz_set_str(e_mpz,e,16);
+    mpz_set_str(n_mpz,mpz_get_str(NULL,16,n_mpz),BASE);
+    mpz_set_str(e_mpz,mpz_get_str(NULL,16,e_mpz),BASE);
     int i = 0 , k = 0;
     while (message[i] !='\0' && i < 600)
     {
         int ascii = (int)message[i];
         mpz_init_set_ui(m_mpz, ascii);
         mpz_powm(output,m_mpz,e_mpz,n_mpz);
-        tmp[k] = mpz_get_str(NULL,10,output);
+        tmp[k] = mpz_get_str(NULL,BASE,output);
         tmp[k+1] = ",";
         i ++;
         k += 2;
@@ -234,12 +255,15 @@ char * decryption(char * message, char * n, char * d)
     mpz_init(d_mpz);
     mpz_init(m_mpz);
     mpz_init(output);
-    mpz_set_str(n_mpz,n,BASE);
-    mpz_set_str(d_mpz,d,BASE);
+    mpz_set_str(n_mpz,n,16);
+    mpz_set_str(d_mpz,d,16);
+    mpz_set_str(n_mpz,mpz_get_str(NULL,16,n_mpz),BASE);
+    mpz_set_str(d_mpz,mpz_get_str(NULL,16,d_mpz),10);
     int i  = 0;
     while (array[i]!=NULL)
     {
-        mpz_set_str(m_mpz,array[i],BASE);
+        mpz_set_str(m_mpz,array[i],16);
+        mpz_set_str(m_mpz,mpz_get_str(NULL,16,m_mpz),BASE);
         mpz_powm(output,m_mpz,d_mpz,n_mpz);
         tmp[i]= (int)mpz_get_ui(output);
         i++;
@@ -254,6 +278,5 @@ char * decryption(char * message, char * n, char * d)
 
 int main(int argc, char const *argv[])
 {
-    printf("%s\n", generateKey());
     return 0;
 }
