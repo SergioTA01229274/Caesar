@@ -9,7 +9,7 @@
 #define BIT_COUNT 1024
 #define BASE 10
 
-static char * prime()
+char * prime()
 {
     mpz_t rand;
     mpz_init(rand);
@@ -25,7 +25,7 @@ static char * prime()
     return tmp;
 }
 
-static char * getN(mpz_t p, mpz_t q)
+char * getN(mpz_t p, mpz_t q)
 {
     mpz_t n;
     mpz_init(n);
@@ -35,7 +35,7 @@ static char * getN(mpz_t p, mpz_t q)
     return tmp;
 }
 
-static char * getPHI(mpz_t p, mpz_t q)
+char * getPHI(mpz_t p, mpz_t q)
 {
     mpz_t phi,
           one,
@@ -56,7 +56,7 @@ static char * getPHI(mpz_t p, mpz_t q)
     return tmp;
 }
 
-static char * getE(mpz_t phi)
+char * getE(mpz_t phi)
 {
     mpz_t gcd;
     mpz_init(gcd);
@@ -79,7 +79,7 @@ static char * getE(mpz_t phi)
     return tmp;
 }
 
-static char * getD(mpz_t e, mpz_t phi)
+char * getD(mpz_t e, mpz_t phi)
 {
     mpz_t d;
     mpz_init(d);
@@ -278,5 +278,12 @@ char * decryption(char * message, char * n, char * d)
 
 int main(int argc, char const *argv[])
 {
+    //printf("%s\n", generateKey());
+    char * n = "b12d86917de5a5e6c8d342cdbca679612a52468c5320717dc45e8f4eed80fe5b9deca11e1bf41eb00cb7cd275e124f661199db2967d8065471ede61ba0389f8191afda756ffddd0ce0e685252b1cb6ffd729d4e29674ffa18f88e938f6477b6de99aadb22ea530d8cfbc930336c5d916d83fcbb7bbd5a1d67c23a3963bfe1aea2c918b43070720c5443096241a631898917b7b34030c27372d0424ee3a1ddb00a0f7fc4b475cbbbd173c9d0fb94cbacaa531ce37f0c66624cb7ceead8553e2938760198550ce002f058de7f3a0cb6af4cf8ea849a9e1843d7dca398327fe0aa7addbc8fe7a14605f21a624606b657c4393903fd27b903e0c4061de2bcfae97bb";
+    char * e = "70b190d0cfc67567382ccf9055100093b9116decc1f098b22a365d42dd4cf800d3f4576ddd4a1095abec36cecfcef8829a02133e6b2bb2a82ad003761f76670701ab09df23d9fdd9762e8a08cf59679d0ea2e9bc80e81778dc025ab7619ed4fc27cfb8d84e730d898c29d391fcf44c60a16d7c20ae32fe8ad9eb0e87a45a6db305e81308284620abcfdc3a4c1c932fba8b25b4fa2206402ce0b4d07f2fa16b1ec74ecdc3c0b5679d4e3a0733688f16a04a84b9d11a4415b6d335de743311fd674afa17844db031d625b149c2aa52699eaea13b2c279fbeb4391791c5796bda9f59a28954af9224c6b1739bbb1152ee4adb4148da1684ac30821081b8c809cb39";
+    char * d = "12e2bf5a43e3cc6a72a6f4f97179c83ec9ce0f698b6920c860a02e4fc80cf47fb2a61966696814d7f84c2206f20b1d715e684150a68af1f82cf06f228c4d63e6dae1bd0eeb07671f713e4b0b6886c216cee390a9e0ee1bbbc734119773d8c32e89bbeb7c321cc57e43da3ae77737afdda903d7f9fa3c67e9014cbd132be67a164f5015d79d73462ffac6cfa5a3cd58c68e1eb46c8629c0c1653e4b9b296e685fe300a0c4eaf92ff99579afb22cbafc59af4c75cabb3ab3db5c4694a6f5629cb58e5563c92c8000feeed8686aca54335d4a6aa1698486407f456e0fb67d79f84defb1da18cc556ae7cf6bf4963e2ecb78fe819e5edc0ad272e91be87dce5d60a9";
+    char * string1 = "i2";
+    char * string2 = encryption(string1,n,e);
+    printf("%s\n",decryption(string2,n,d));
     return 0;
 }
