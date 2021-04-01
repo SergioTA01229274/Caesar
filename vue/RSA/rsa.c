@@ -180,7 +180,6 @@ char * generateKey(){
     strcat(tmp,mpz_get_str(NULL,16,b2b_e));
     strcat(tmp,",");
     strcat(tmp,mpz_get_str(NULL,16,b2b_d));
-    strcat(tmp,",");
     mpz_clear(b2b_n);
     mpz_clear(b2b_e);
     mpz_clear(b2b_d);
@@ -189,9 +188,9 @@ char * generateKey(){
 
 char ** strToChar(char local_message[])
 {
-    char *message = malloc(300*BIT_COUNT*sizeof(char));
+    char *message = calloc(300*BIT_COUNT*sizeof(char),sizeof(char*));
     strcpy(message, local_message);
-    char ** array = malloc(300 * sizeof(char*));
+    char ** array = calloc(300 * sizeof(char*),sizeof(char*));
     char* context = NULL;
     char* token = strtok_r(message, ",",&context);
     int num_tokens = 0, i = 0;
@@ -206,7 +205,7 @@ char ** strToChar(char local_message[])
 
 char * encryption(char * message, char * n, char * e)
 {
-    char *res = malloc(300 * sizeof(unsigned long) + 1);
+    char *res = calloc(300 * sizeof(unsigned long) + 1,sizeof(char*));
     char * tmp [600];
     mpz_t n_mpz,
           e_mpz,
@@ -226,7 +225,7 @@ char * encryption(char * message, char * n, char * e)
         int ascii = (int)message[i];
         mpz_init_set_ui(m_mpz, ascii);
         mpz_powm(output,m_mpz,e_mpz,n_mpz);
-        tmp[k] = mpz_get_str(NULL,BASE,output);
+        tmp[k] = mpz_get_str(NULL,16,output);
         tmp[k+1] = ",";
         i ++;
         k += 2;
@@ -250,7 +249,7 @@ char * decryption(char * message, char * n, char * d)
           m_mpz,
           output;
     char ** array = strToChar(message);
-    char * tmp = malloc(300*sizeof(char));
+    char * tmp = calloc(300*sizeof(char),sizeof(char*));
     mpz_init(n_mpz);
     mpz_init(d_mpz);
     mpz_init(m_mpz);
@@ -278,12 +277,5 @@ char * decryption(char * message, char * n, char * d)
 
 int main(int argc, char const *argv[])
 {
-    //printf("%s\n", generateKey());
-    char * n = "b12d86917de5a5e6c8d342cdbca679612a52468c5320717dc45e8f4eed80fe5b9deca11e1bf41eb00cb7cd275e124f661199db2967d8065471ede61ba0389f8191afda756ffddd0ce0e685252b1cb6ffd729d4e29674ffa18f88e938f6477b6de99aadb22ea530d8cfbc930336c5d916d83fcbb7bbd5a1d67c23a3963bfe1aea2c918b43070720c5443096241a631898917b7b34030c27372d0424ee3a1ddb00a0f7fc4b475cbbbd173c9d0fb94cbacaa531ce37f0c66624cb7ceead8553e2938760198550ce002f058de7f3a0cb6af4cf8ea849a9e1843d7dca398327fe0aa7addbc8fe7a14605f21a624606b657c4393903fd27b903e0c4061de2bcfae97bb";
-    char * e = "70b190d0cfc67567382ccf9055100093b9116decc1f098b22a365d42dd4cf800d3f4576ddd4a1095abec36cecfcef8829a02133e6b2bb2a82ad003761f76670701ab09df23d9fdd9762e8a08cf59679d0ea2e9bc80e81778dc025ab7619ed4fc27cfb8d84e730d898c29d391fcf44c60a16d7c20ae32fe8ad9eb0e87a45a6db305e81308284620abcfdc3a4c1c932fba8b25b4fa2206402ce0b4d07f2fa16b1ec74ecdc3c0b5679d4e3a0733688f16a04a84b9d11a4415b6d335de743311fd674afa17844db031d625b149c2aa52699eaea13b2c279fbeb4391791c5796bda9f59a28954af9224c6b1739bbb1152ee4adb4148da1684ac30821081b8c809cb39";
-    char * d = "12e2bf5a43e3cc6a72a6f4f97179c83ec9ce0f698b6920c860a02e4fc80cf47fb2a61966696814d7f84c2206f20b1d715e684150a68af1f82cf06f228c4d63e6dae1bd0eeb07671f713e4b0b6886c216cee390a9e0ee1bbbc734119773d8c32e89bbeb7c321cc57e43da3ae77737afdda903d7f9fa3c67e9014cbd132be67a164f5015d79d73462ffac6cfa5a3cd58c68e1eb46c8629c0c1653e4b9b296e685fe300a0c4eaf92ff99579afb22cbafc59af4c75cabb3ab3db5c4694a6f5629cb58e5563c92c8000feeed8686aca54335d4a6aa1698486407f456e0fb67d79f84defb1da18cc556ae7cf6bf4963e2ecb78fe819e5edc0ad272e91be87dce5d60a9";
-    char * string1 = "i2";
-    char * string2 = encryption(string1,n,e);
-    printf("%s\n",decryption(string2,n,d));
     return 0;
 }
