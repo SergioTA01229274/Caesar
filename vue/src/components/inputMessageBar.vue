@@ -35,27 +35,12 @@
 export default {
 
     name:"inputMessageBar",
-    mounted() {
-        const cipherPlugin = document.createElement("script");
-        cipherPlugin.setAttribute(
-        "src",
-        "http://localhost:8080/hello.js"
-        );
-        cipherPlugin.async = true;
-        document.head.appendChild(cipherPlugin);
-    },
     data (){
         return {
             tmpMessage: ''
         }
     },
     methods: {
-        sendFileEvent() {
-            /*
-            let d= Module.cwrap("sumar", "number");
-            console.log(d());
-            */
-        },
         sendMsgEvent() {
             /* 
             let cipherFunc = Module.cwrap("cipher", "string", "string");
