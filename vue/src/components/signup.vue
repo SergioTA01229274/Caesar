@@ -3,13 +3,13 @@
         <v-container id='container'>
             <div id="subContainer">
                 <v-row>
-                <v-text-field class = 'inputField' label='Username' hide-details = 'auto' filled rounded dense></v-text-field>
+                <v-text-field v-model="newUsername" class = 'inputField' label='Username' hide-details = 'auto' filled rounded dense></v-text-field>
             </v-row>
             <v-row>
-                <v-text-field class = 'inputField' label = 'Password' required type = 'password' filled rounded dense></v-text-field>
+                <v-text-field v-model="newPass" class = 'inputField' label = 'Password' required type = 'password' filled rounded dense></v-text-field>
             </v-row>
             <v-row>
-                <v-text-field class = 'inputField' label = 'Confirm Password' required type = 'password' filled rounded dense></v-text-field>
+                <v-text-field v-model="confirmNewPass" class = 'inputField' label = 'Confirm Password' required type = 'password' filled rounded dense></v-text-field>
             </v-row>
             <v-row>
                 <v-btn id = 'submitButton' @click="createUser()">
@@ -58,10 +58,41 @@
 </style>
 
 <script>
+import axios from 'axios';
     export default {
         name:'signup',
+        data(){
+            return{
+                newUsername: '',
+                newPass: '',
+                confirmNewPass: ''
+            }
+        },
+        mounted(){
+            const cipherPlugin = document.createElement("script");
+            cipherPlugin.setAttribute(
+            "src",
+            `${window.location.origin}/rsa.js`
+            );
+            cipherPlugin.async = true;
+            document.head.appendChild(cipherPlugin);
+        },
         methods: {
             createUser(){
+                const genKey = Module.cwrap("generateKey", "string");
+                const keyToAdd = genKey();
+                const keyArr = keyToAdd.split(",");
+                console.log(keyArr);
+                if(String(this.newPass) == String(this.confirmNewPass)){
+                    let body = {username: this.newUsername, password: this.newPass, rsaObj: {e: keyArr[1], n: keyArr[0], d: keyArr[2]}};
+                    axios.post(this.$serverBaseURL + 'signUp', body).then(response => {
+                        console.log(response.data.data);
+                    }).catch((error) => {
+                        console.log(error.response.data.msg);
+                    });
+                }else{
+                    console.log("Credentials doesn't match");
+                }
                 this.$router.push({path: '/'});
             }
         }

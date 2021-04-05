@@ -22,7 +22,8 @@ async function signUp(name, pass, rsaObj){
     let userInfo = {
         password: crypto.createHash('sha256').update(pass).digest('hex'),
         loginKey: tmpLoginKey,
-        rsaObj: rsaObj,
+        rsaObj: {e: rsaObj.e, n: rsaObj.n, d: rsaObj.d},
+        publicKey: crypto.randomBytes(512).toString('hex'),
         registerDate: (new Date()).toString(),
         lastLoginDate: (new Date()).toString(),
         contacts: [],
@@ -145,7 +146,7 @@ async function getUserInfo(username){
     userSnapshot.forEach((doc) => {
         let tmpData = doc.data();
         if(String(username) == String(doc.id)){
-            userInfo.publicKey = tmpData.publicKey;
+            userInfo.rsaObj = tmpData.rsaObj;
             userInfo.lastLoginDate = tmpData.lastLoginDate;
             userInfo.registerDate = tmpData.registerDate;
         }
@@ -161,7 +162,7 @@ async function getContactPublicInfo(contact){
         if(String(contact) == String(doc.id)){
             contactInfo.ipAddress = tmpData.ipAddress;
             contactInfo.lastLoginDate = tmpData.lastLoginDate;
-            contactInfo.publicKey = tmpData.publicKey;
+            contactInfo.publicKey = tmpData.rsaObj;
         }
     });
     return {msg: 'Contact information gotten successfully', statusCode: 200, data: contactInfo};
