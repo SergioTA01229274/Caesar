@@ -94,7 +94,8 @@ export default {
         axios.get(this.$serverBaseURL + `/getUserInfo/${this.usernameInStorage}`).then((response) => {
                 this.privMenuData.publicKey = response.data.data.rsaObj.e;
                 this.key.myN = response.data.data.rsaObj.n;
-                this.key.d = response.data.data.rsaObj.d;
+                //this.key.d = response.data.data.rsaObj.d;
+                this.key.d = localStorage.privKey
                 
                 let tmpLastDate = response.data.data.lastLoginDate.split(" ");
                 this.privMenuData.lastLoginDate = tmpLastDate[2] + '/' + tmpLastDate[1] + '/' + tmpLastDate[3] + ' ' + tmpLastDate[4];
@@ -107,9 +108,9 @@ export default {
         });
   },
   created() {
-      this.socket.connect();
-      this.socket.on("clntMsg", (msgObj) => {
-          console.log(msgObj.msg);
+        this.socket.connect();
+        this.socket.on("clntMsg", (msgObj) => {
+        console.log(msgObj.msg);
         this.callDecryption(msgObj.msg);
         console.log(this.encryptedMessage);
         this.messageList[this.rTag].push({sender: msgObj.sender, msg: this.encryptedMessage.slice(0, msgObj.length), receiver: msgObj.receiver, rFlag: true});

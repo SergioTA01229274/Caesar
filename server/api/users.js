@@ -23,7 +23,6 @@ async function signUp(name, pass, rsaObj){
         password: crypto.createHash('sha256').update(pass).digest('hex'),
         loginKey: tmpLoginKey,
         rsaObj: {e: rsaObj.e, n: rsaObj.n, d: rsaObj.d},
-        publicKey: crypto.randomBytes(512).toString('hex'),
         registerDate: (new Date()).toString(),
         lastLoginDate: (new Date()).toString(),
         contacts: [],

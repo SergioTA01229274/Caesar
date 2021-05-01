@@ -8,17 +8,13 @@
                             prepend-icon=mdi-account-key 
                             v-model="key" 
                             accept=".json" 
-                            label="Key.json" 
+                            label="Identity Package.json" 
                             @change="previewFiles" 
                             @keyup.enter="verifyJSON" 
                             truncate-length="15"> 
                         </v-file-input>
                     </v-col>
                 </v-row>
-                <!--<v-row id="keysRow">
-                    <v-col><v-textarea v-model="loginKeyToVerify" label="Login Key" id="loginKeyArea" no-resize></v-textarea></v-col>
-                    <v-col> <v-textarea v-model="privateKeyToLoad" label="Private Key to load" id="privateKeyArea" no-resize></v-textarea></v-col>
-                </v-row>-->
                 <v-row id="btnRow">
                     <v-btn 
                         id = 'submitButton' 
@@ -47,23 +43,22 @@ export default {
             privateKeyToLoad: '',
             isFormValid: false,
             key: {
+                login: '',
                 public: {
-                    n: ' ',
-                    e: ' '
+                    n: '',
+                    e: ''
                 },
                 private: {
-                    login: ' ', 
-                    n: ' ',
-                    d: ' '
+                    n: '',
+                    d: ''
                 }
             },
         }
     },
     methods: {
-        previewFiles: function(files) {
+        previewFiles(files) {
             if (files != null) {
                 const reader = new FileReader();
-                var result;
                 reader.onload = (event) => {
                     this.parseKeys(event.target.result);
                 }
@@ -79,8 +74,9 @@ export default {
             } catch (error) {
                 this.isFormValid = false;
             }
-            if(this.key.private.login != ''){
-                this.loginKeyToVerify = this.key.private.login;
+            if(this.key.login != ''){
+                this.loginKeyToVerify = this.key.login;
+                this.privateKeyToLoad = this.key.private.d;
                 this.isFormValid = true;
             } else {
                 this.isFormValid = false;
@@ -88,12 +84,12 @@ export default {
         },
         keys(){
             this.key = {
+                login: '',
                 public: {
                         n: '',
                         e: ''
                     },
-                    private: {
-                        login: '', 
+                    private: { 
                         n: '',
                         d: ''
                     }
@@ -102,7 +98,6 @@ export default {
         },
         verifyKeys(){
             let body = {username: localStorage.username, loginKey: this.loginKeyToVerify};
-            console.log(body);
             axios.post(this.$serverBaseURL + 'loginIden', body).then(response => {
                 if(response.status == 200){
                     localStorage.privKey = String(this.privateKeyToLoad);
