@@ -18,16 +18,12 @@
            >Search contact</v-text-field>
 
           <v-spacer></v-spacer>
-
-          <v-btn icon>
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
           <v-btn icon @click="addContatc()">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-toolbar>
         <div id="contactsCard">
-          <template v-for="(item, index) in items" >
+          <template v-for="(item) in items" >
             <v-subheader
               v-if="item.header"
               :key="item.header"
@@ -38,12 +34,6 @@
                   item.header
                 }}
             </v-subheader>
-
-            <v-divider
-              v-else-if="item.divider"
-              :key="index"
-              inset
-            ></v-divider>
             
             <v-list-item
               v-else
@@ -80,8 +70,7 @@ import axios from 'axios';
         items: [
           {
             header: 'Contacts',
-          },
-          { divider: true }
+          }
         ],
       }
     },
