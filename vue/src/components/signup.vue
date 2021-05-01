@@ -82,7 +82,6 @@ import axios from 'axios';
                 const genKey = Module.cwrap("generateKey", "string");
                 const keyToAdd = genKey();
                 const keyArr = keyToAdd.split(",");
-                console.log(keyArr);
                 if(String(this.newPass) == String(this.confirmNewPass)){
                     let body = {username: this.newUsername, password: this.newPass, rsaObj: {e: keyArr[1], n: keyArr[0], d: keyArr[2]}};
                     axios.post(this.$serverBaseURL + 'signUp', body).then(response => {

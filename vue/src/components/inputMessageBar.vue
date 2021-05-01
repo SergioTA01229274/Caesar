@@ -38,17 +38,8 @@ export default {
     },
     methods: {
         sendMsgEvent() {
-            /* 
-            let cipherFunc = Module.cwrap("cipher", "string", "string");
-            let computeMAC = Module.cwrap("getMac", "string", "string");
-            let cipherText = cipherFunc(this.tmpMessage);
-            let MAC = computeMAC(cipherText);
-            let DMObj = {msg: cipherText, integrityCode: MAC, reeiver: this.receiver};
-            this.socket.emit("privateMessage", DMObj);
-            */
             this.$emit("sendMsg", this.tmpMessage);
             this.tmpMessage = '';
-            // send event to GUIChat as well to handle front
         }
     }
   }
