@@ -89,6 +89,17 @@ import axios from 'axios';
                     }).catch((error) => {
                         console.log(error.response.data.msg);
                     });
+                    var blob = new Blob([JSON.stringify(body.rsaObj, null, 2)], {
+                            type: 'application/json'})
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'key.json';
+                    a.click();
+                    /*window.open(URL.createObjectURL(
+                        new Blob([JSON.stringify(body.rsaObj, null, 2)], {
+                            type: 'application/json'})
+                    ), "Key");*/
                 }else{
                     console.log("Credentials doesn't match");
                 }
