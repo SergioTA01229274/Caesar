@@ -85,21 +85,16 @@ import axios from 'axios';
                 if(String(this.newPass) == String(this.confirmNewPass)){
                     let body = {username: this.newUsername, password: this.newPass, rsaObj: {e: keyArr[1], n: keyArr[0], d: keyArr[2]}};
                     axios.post(this.$serverBaseURL + 'signUp', body).then(response => {
-                        console.log(response.data.data);
+                        var fileObj = {"public":{"n":body.rsaObj.n, "e":body.rsaObj.e}, "private":{"n":body.rsaObj.n, "d":body.rsaObj.d}, "login":response.data.data.loginKey}
+                        var blob = new Blob([JSON.stringify(fileObj, null, 2)], {type: 'application/json'})
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'Identity Package.json';
+                        a.click();
                     }).catch((error) => {
                         console.log(error.response.data.msg);
                     });
-                    var blob = new Blob([JSON.stringify(body.rsaObj, null, 2)], {
-                            type: 'application/json'})
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'key.json';
-                    a.click();
-                    /*window.open(URL.createObjectURL(
-                        new Blob([JSON.stringify(body.rsaObj, null, 2)], {
-                            type: 'application/json'})
-                    ), "Key");*/
                 }else{
                     console.log("Credentials doesn't match");
                 }
