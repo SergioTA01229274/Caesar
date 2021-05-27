@@ -3,7 +3,7 @@
         <form id="loginSection">
             <div id="container">
                 <v-text-field required class="inputField" label="Username" hide-details="auto" v-model="usernameInput" filled rounded dense @keyup.enter="loginReq">
-                <span v-if="msg.usernameInput">{{msg.usernameInput}}</span>
+                <span v-if="isValidUser">{{msg.usernameInput}}</span>
             </v-text-field>
             <br><v-text-field class="inputField" label="Password" required type="password" v-model="passwordInput" filled rounded dense @keyup.enter="loginReq">
                 <span v-if="msg.passwordInput">{{msg.passwordInput}}</span>
@@ -72,15 +72,22 @@ import router from '../router/router'
         return{
             usernameInput: '',
             passwordInput: '',
-            msg: []
+            isValidUser: false,
+
+            msg:{
+                usernameInput: '',
+                passwordInput: ''
+            }
         }
     },
-    watch: {
-        username(value){
+    computed: {
+        username: function(value){
+            console.log("Hello");
             this.usernameInput = value;
             this.validateEmail(value);
+            return this.msg.usernameInput;
         },
-        password(value){
+        password: function(value){
             this.passwordInput = value;
             this.validatePassword(value);
         }
@@ -105,17 +112,18 @@ import router from '../router/router'
         validateEmail(value){
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
             {
-                this.msg['usernameInput'] = '';
+                this.msg.usernameInput = '';
+                this.isValidUser = true;
             } else{
-                this.msg['usernameInput'] = 'Invalid Username';
+                this.msg.usernameInput = 'Invalid Username';
             } 
         },
         validatePassword(value){
-            let difference = 8 - value.length;
-            if (value.length<8) {
-                this.msg['passwordInput'] = 'Must be 8 characters! '+ difference + ' characters left' ;
+            let difference = 5 - value.length;
+            if (value.length<5) {
+                this.msg.passwordInput = 'Must be 5 characters! '+ difference + ' characters left' ;
             } else {
-                this.msg['passwordInput'] = '';
+                this.msg.passwordInput = '';
             }
         }
     }
