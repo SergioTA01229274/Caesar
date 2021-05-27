@@ -2,9 +2,11 @@
     <v-container id="app">
         <form id="loginSection">
             <div id="container">
-                <v-text-field class="inputField" label="Username" hide-details="auto" v-model="usernameInput" filled rounded dense @keyup.enter="loginReq">
+                <v-text-field required class="inputField" label="Username" hide-details="auto" v-model="usernameInput" filled rounded dense @keyup.enter="loginReq">
+                <span v-if="msg.usernameInput">{{msg.usernameInput}}</span>
             </v-text-field>
             <br><v-text-field class="inputField" label="Password" required type="password" v-model="passwordInput" filled rounded dense @keyup.enter="loginReq">
+                <span v-if="msg.passwordInput">{{msg.passwordInput}}</span>
             </v-text-field>
             <v-btn id="loginButton" class="logButton" large @click="loginReq">
                 <label for="loginButton" class="buttonLabel">Login</label>
@@ -69,7 +71,18 @@ import router from '../router/router'
     data(){
         return{
             usernameInput: '',
-            passwordInput: ''
+            passwordInput: '',
+            msg: []
+        }
+    },
+    watch: {
+        username(value){
+            this.usernameInput = value;
+            this.validateEmail(value);
+        },
+        password(value){
+            this.passwordInput = value;
+            this.validatePassword(value);
         }
     },
     methods: {
@@ -88,6 +101,22 @@ import router from '../router/router'
         },
         signUpReq() {
             router.push({path: '/signUp'});
+        },
+        validateEmail(value){
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
+            {
+                this.msg['usernameInput'] = '';
+            } else{
+                this.msg['usernameInput'] = 'Invalid Username';
+            } 
+        },
+        validatePassword(value){
+            let difference = 8 - value.length;
+            if (value.length<8) {
+                this.msg['passwordInput'] = 'Must be 8 characters! '+ difference + ' characters left' ;
+            } else {
+                this.msg['passwordInput'] = '';
+            }
         }
     }
   }
